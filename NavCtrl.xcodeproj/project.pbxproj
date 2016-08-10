@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		481A53511D5B9BBE00DB26DB /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 481A53501D5B9BBE00DB26DB /* WebViewController.m */; };
+		486BAD631D5A6A400091A706 /* apple.png in Resources */ = {isa = PBXBuildFile; fileRef = 486BAD621D5A6A400091A706 /* apple.png */; };
+		486BAD671D5A6B070091A706 /* Samsung.png in Resources */ = {isa = PBXBuildFile; fileRef = 486BAD661D5A6B070091A706 /* Samsung.png */; };
+		486BAD6D1D5A6C530091A706 /* motorola2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 486BAD6C1D5A6C530091A706 /* motorola2.jpg */; };
+		486BAD6F1D5A6C570091A706 /* Nokia2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 486BAD6E1D5A6C570091A706 /* Nokia2.jpg */; };
 		48A656B518163BF200746D36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48A656B418163BF200746D36 /* Foundation.framework */; };
 		48A656B718163BF200746D36 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48A656B618163BF200746D36 /* CoreGraphics.framework */; };
 		48A656B918163BF200746D36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48A656B818163BF200746D36 /* UIKit.framework */; };
@@ -36,6 +41,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		481A534F1D5B9BBE00DB26DB /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebViewController.h; path = ../WebViewController.h; sourceTree = "<group>"; };
+		481A53501D5B9BBE00DB26DB /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebViewController.m; path = ../WebViewController.m; sourceTree = "<group>"; };
+		486BAD621D5A6A400091A706 /* apple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apple.png; sourceTree = "<group>"; };
+		486BAD661D5A6B070091A706 /* Samsung.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Samsung.png; sourceTree = "<group>"; };
+		486BAD6C1D5A6C530091A706 /* motorola2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = motorola2.jpg; path = NavCtrlTests/motorola2.jpg; sourceTree = SOURCE_ROOT; };
+		486BAD6E1D5A6C570091A706 /* Nokia2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Nokia2.jpg; sourceTree = "<group>"; };
 		48A656B118163BF200746D36 /* NavCtrl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NavCtrl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48A656B418163BF200746D36 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		48A656B618163BF200746D36 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -107,6 +118,8 @@
 			children = (
 				48A656E818163F8700746D36 /* ProductViewController.h */,
 				48A656E918163F8700746D36 /* ProductViewController.m */,
+				481A534F1D5B9BBE00DB26DB /* WebViewController.h */,
+				481A53501D5B9BBE00DB26DB /* WebViewController.m */,
 			);
 			name = ProductViewController;
 			sourceTree = "<group>";
@@ -178,6 +191,10 @@
 		48A656D418163BF200746D36 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				486BAD621D5A6A400091A706 /* apple.png */,
+				486BAD661D5A6B070091A706 /* Samsung.png */,
+				486BAD6E1D5A6C570091A706 /* Nokia2.jpg */,
+				486BAD6C1D5A6C530091A706 /* motorola2.jpg */,
 				48A656D518163BF200746D36 /* NavCtrlTests-Info.plist */,
 				48A656D618163BF200746D36 /* InfoPlist.strings */,
 			);
@@ -271,6 +288,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				486BAD631D5A6A400091A706 /* apple.png in Resources */,
+				486BAD671D5A6B070091A706 /* Samsung.png in Resources */,
+				486BAD6D1D5A6C530091A706 /* motorola2.jpg in Resources */,
+				486BAD6F1D5A6C570091A706 /* Nokia2.jpg in Resources */,
 				48A656D818163BF200746D36 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				48A656E618163C1B00746D36 /* CompanyViewController.m in Sources */,
+				481A53511D5B9BBE00DB26DB /* WebViewController.m in Sources */,
 				48A656C518163BF200746D36 /* NavControllerAppDelegate.m in Sources */,
 				48A656C118163BF200746D36 /* main.m in Sources */,
 				48A656EB18163F8700746D36 /* ProductViewController.m in Sources */,
@@ -409,6 +431,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NavCtrl/NavCtrl-Prefix.pch";
 				INFOPLIST_FILE = "NavCtrl/NavCtrl-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "qcd.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -424,6 +447,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NavCtrl/NavCtrl-Prefix.pch";
 				INFOPLIST_FILE = "NavCtrl/NavCtrl-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "qcd.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
