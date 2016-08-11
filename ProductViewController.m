@@ -73,10 +73,9 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    Product * product = [self.company.products objectAtIndex:[indexPath row]];
+    Product *product = [self.company.products objectAtIndex:[indexPath row]];
 
     cell.textLabel.text = product.productName;
-//    [[cell imageView] setImage:[[self.company.products objectAtIndex:[indexPath row]] companyLogo]];
     cell.imageView.image = [UIImage imageNamed:product.imageName];
     
     return cell;

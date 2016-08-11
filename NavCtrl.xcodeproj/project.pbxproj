@@ -10,6 +10,7 @@
 		481A53511D5B9BBE00DB26DB /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 481A53501D5B9BBE00DB26DB /* WebViewController.m */; };
 		482A5F3F1D5CDD5D0061A009 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = 482A5F3E1D5CDD5D0061A009 /* Company.m */; };
 		482A5F421D5CDD6A0061A009 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 482A5F411D5CDD6A0061A009 /* Product.m */; };
+		482A5F451D5D185B0061A009 /* DAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 482A5F441D5D185B0061A009 /* DAO.m */; };
 		486BAD631D5A6A400091A706 /* apple.png in Resources */ = {isa = PBXBuildFile; fileRef = 486BAD621D5A6A400091A706 /* apple.png */; };
 		486BAD671D5A6B070091A706 /* Samsung.png in Resources */ = {isa = PBXBuildFile; fileRef = 486BAD661D5A6B070091A706 /* Samsung.png */; };
 		486BAD6D1D5A6C530091A706 /* motorola2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 486BAD6C1D5A6C530091A706 /* motorola2.jpg */; };
@@ -49,6 +50,8 @@
 		482A5F3E1D5CDD5D0061A009 /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Company.m; path = ../Company.m; sourceTree = "<group>"; };
 		482A5F401D5CDD6A0061A009 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Product.h; path = ../Product.h; sourceTree = "<group>"; };
 		482A5F411D5CDD6A0061A009 /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Product.m; path = ../Product.m; sourceTree = "<group>"; };
+		482A5F431D5D185B0061A009 /* DAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DAO.h; path = ../DAO.h; sourceTree = "<group>"; };
+		482A5F441D5D185B0061A009 /* DAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DAO.m; path = ../DAO.m; sourceTree = "<group>"; };
 		486BAD621D5A6A400091A706 /* apple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apple.png; sourceTree = "<group>"; };
 		486BAD661D5A6B070091A706 /* Samsung.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Samsung.png; sourceTree = "<group>"; };
 		486BAD6C1D5A6C530091A706 /* motorola2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = motorola2.jpg; path = NavCtrlTests/motorola2.jpg; sourceTree = SOURCE_ROOT; };
@@ -130,6 +133,8 @@
 				482A5F3E1D5CDD5D0061A009 /* Company.m */,
 				482A5F401D5CDD6A0061A009 /* Product.h */,
 				482A5F411D5CDD6A0061A009 /* Product.m */,
+				482A5F431D5D185B0061A009 /* DAO.h */,
+				482A5F441D5D185B0061A009 /* DAO.m */,
 			);
 			name = ProductViewController;
 			sourceTree = "<group>";
@@ -317,6 +322,7 @@
 				48A656E618163C1B00746D36 /* CompanyViewController.m in Sources */,
 				482A5F3F1D5CDD5D0061A009 /* Company.m in Sources */,
 				481A53511D5B9BBE00DB26DB /* WebViewController.m in Sources */,
+				482A5F451D5D185B0061A009 /* DAO.m in Sources */,
 				48A656C518163BF200746D36 /* NavControllerAppDelegate.m in Sources */,
 				48A656C118163BF200746D36 /* main.m in Sources */,
 				48A656EB18163F8700746D36 /* ProductViewController.m in Sources */,

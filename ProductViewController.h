@@ -17,5 +17,7 @@
 //@property (nonatomic, retain) NSMutableArray *products; //
 @property (strong, nonatomic) WebViewController *wVC;
 @property (strong, nonatomic) Company *company;
+//@property (strong, nonatomic) DAO *dao;
+
 
 @end
