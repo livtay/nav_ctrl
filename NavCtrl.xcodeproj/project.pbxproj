@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		481A53511D5B9BBE00DB26DB /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 481A53501D5B9BBE00DB26DB /* WebViewController.m */; };
+		482A5F3F1D5CDD5D0061A009 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = 482A5F3E1D5CDD5D0061A009 /* Company.m */; };
+		482A5F421D5CDD6A0061A009 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 482A5F411D5CDD6A0061A009 /* Product.m */; };
 		486BAD631D5A6A400091A706 /* apple.png in Resources */ = {isa = PBXBuildFile; fileRef = 486BAD621D5A6A400091A706 /* apple.png */; };
 		486BAD671D5A6B070091A706 /* Samsung.png in Resources */ = {isa = PBXBuildFile; fileRef = 486BAD661D5A6B070091A706 /* Samsung.png */; };
 		486BAD6D1D5A6C530091A706 /* motorola2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 486BAD6C1D5A6C530091A706 /* motorola2.jpg */; };
@@ -43,6 +45,10 @@
 /* Begin PBXFileReference section */
 		481A534F1D5B9BBE00DB26DB /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebViewController.h; path = ../WebViewController.h; sourceTree = "<group>"; };
 		481A53501D5B9BBE00DB26DB /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebViewController.m; path = ../WebViewController.m; sourceTree = "<group>"; };
+		482A5F3D1D5CDD5D0061A009 /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Company.h; path = ../Company.h; sourceTree = "<group>"; };
+		482A5F3E1D5CDD5D0061A009 /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Company.m; path = ../Company.m; sourceTree = "<group>"; };
+		482A5F401D5CDD6A0061A009 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Product.h; path = ../Product.h; sourceTree = "<group>"; };
+		482A5F411D5CDD6A0061A009 /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Product.m; path = ../Product.m; sourceTree = "<group>"; };
 		486BAD621D5A6A400091A706 /* apple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apple.png; sourceTree = "<group>"; };
 		486BAD661D5A6B070091A706 /* Samsung.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Samsung.png; sourceTree = "<group>"; };
 		486BAD6C1D5A6C530091A706 /* motorola2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = motorola2.jpg; path = NavCtrlTests/motorola2.jpg; sourceTree = SOURCE_ROOT; };
@@ -120,6 +126,10 @@
 				48A656E918163F8700746D36 /* ProductViewController.m */,
 				481A534F1D5B9BBE00DB26DB /* WebViewController.h */,
 				481A53501D5B9BBE00DB26DB /* WebViewController.m */,
+				482A5F3D1D5CDD5D0061A009 /* Company.h */,
+				482A5F3E1D5CDD5D0061A009 /* Company.m */,
+				482A5F401D5CDD6A0061A009 /* Product.h */,
+				482A5F411D5CDD6A0061A009 /* Product.m */,
 			);
 			name = ProductViewController;
 			sourceTree = "<group>";
@@ -303,7 +313,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				482A5F421D5CDD6A0061A009 /* Product.m in Sources */,
 				48A656E618163C1B00746D36 /* CompanyViewController.m in Sources */,
+				482A5F3F1D5CDD5D0061A009 /* Company.m in Sources */,
 				481A53511D5B9BBE00DB26DB /* WebViewController.m in Sources */,
 				48A656C518163BF200746D36 /* NavControllerAppDelegate.m in Sources */,
 				48A656C118163BF200746D36 /* main.m in Sources */,

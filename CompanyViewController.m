@@ -8,6 +8,7 @@
 
 #import "CompanyViewController.h"
 #import "ProductViewController.h"
+#import "Product.h"
 
 @interface CompanyViewController ()
 
@@ -35,10 +36,32 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.companyList = [[NSMutableArray alloc] initWithArray:@[@"Apple mobile devices",@"Samsung mobile devices", @"Nokia mobile devices", @"Motorola mobile devices"]];
+    Product *iPad = [[Product alloc] initWithProductName:@"iPad" andUrl:@"https://www.apple.com/ipad/" andImageName:@"apple.png"];
+    Product *iPodTouch = [[Product alloc] initWithProductName:@"iPod Touch" andUrl:@"https://www.apple.com/ipod-touch/" andImageName:@"apple.png"];
+    Product *iPhone = [[Product alloc] initWithProductName:@"iPhone" andUrl:@"https://www.apple.com/iphone/" andImageName:@"apple.png"];
+    Company *apple = [[Company alloc] initWithCompanyName:@"Apple mobile devices" andLogo:[UIImage imageNamed:@"apple.png"]];
+    [apple.products addObjectsFromArray:@[iPad, iPhone, iPodTouch]];
+
+    Product *galaxyS4 = [[Product alloc] initWithProductName:@"Galaxy S4" andUrl:@"https://www.cnet.com/products/samsung-galaxy-s4/" andImageName:@"apple.png"];
+    Product *galaxyNote = [[Product alloc] initWithProductName:@"Galaxy Note" andUrl:@"https://www.cnet.com/products/samsung-galaxy-note-7-preview/" andImageName:@"apple.png"];
+    Product *galaxyTab = [[Product alloc] initWithProductName:@"Galaxy Tab" andUrl:@"https://www.cnet.com/products/samsung-galaxy-tab-e/" andImageName:@"apple.png"];
+    Company *samsung = [[Company alloc] initWithCompanyName:@"Samsung mobile devices" andLogo:[UIImage imageNamed:@"Samsung.png"]];
+    [samsung.products addObjectsFromArray:@[galaxyS4, galaxyNote, galaxyTab]];
     
+    Product *lumia1520 = [[Product alloc] initWithProductName:@"Lumia 1520" andUrl:@"https://www.microsoft.com/en-us/mobile/phone/lumia1520/" andImageName:@"apple.png"];
+    Product *lumia650 = [[Product alloc] initWithProductName:@"Lumia 650" andUrl:@"https://www.microsoft.com/en-us/mobile/es/lumia650/" andImageName:@"apple.png"];
+    Product *n1 = [[Product alloc] initWithProductName:@"N1" andUrl:@"https://www.cnet.com/products/nokia-n1/" andImageName:@"apple.png"];
+    Company *nokia = [[Company alloc] initWithCompanyName:@"Nokia mobile devices" andLogo:[UIImage imageNamed:@"Nokia2.jpg"]];
+    [nokia.products addObjectsFromArray:@[lumia1520, lumia650, n1]];
+    
+    Product *motoZ = [[Product alloc] initWithProductName:@"Moto Z Droid" andUrl:@"https://www.motorola.com/us/products/moto-z-droid-edition" andImageName:@"apple.png"];
+    Product *motoXPure = [[Product alloc] initWithProductName:@"Moto X Pure Edition" andUrl:@"https://www.motorola.com/us/products/moto-x-pure-edition" andImageName:@"apple.png"];
+    Product *xoomTab = [[Product alloc] initWithProductName:@"XOOM Tablet" andUrl:@"https://www.cnet.com/products/motorola-with-wi-fi/" andImageName:@"apple.png"];
+    Company *motorola = [[Company alloc] initWithCompanyName:@"Motorola mobile devices" andLogo:[UIImage imageNamed:@"motorola2.jpg"]];
+    [motorola.products addObjectsFromArray:@[motoZ, motoXPure, xoomTab]];
+    
+    self.companyList = [[NSMutableArray alloc] initWithObjects:apple, samsung, nokia, motorola, nil];
     self.title = @"Mobile device makers";
-    
     
 }
 
@@ -71,19 +94,9 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    
-    // Configure the cell...
-    cell.textLabel.text = [self.companyList objectAtIndex:[indexPath row]];
-    
-    if (indexPath.row == 0) {
-        [[cell imageView] setImage:[UIImage imageNamed:@"apple.png"]];
-    } else if (indexPath.row == 1) {
-        [[cell imageView] setImage:[UIImage imageNamed:@"Samsung.png"]];
-    } else if (indexPath.row == 2) {
-        [[cell imageView] setImage:[UIImage imageNamed:@"Nokia2.jpg"]];
-    } else if (indexPath.row == 3) {
-        [[cell imageView] setImage:[UIImage imageNamed:@"motorola2.jpg"]];
-    }
+
+    cell.textLabel.text = [[self.companyList objectAtIndex:[indexPath row]] companyName];
+    [[cell imageView] setImage:[[self.companyList objectAtIndex:[indexPath row]] companyLogo]];
     
     return cell;
 }
@@ -139,17 +152,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    self.productViewController.title = [self.companyList objectAtIndex:indexPath.row];
-    
-//    if (indexPath.row == 0){
-//        self.productViewController.title = @"Apple mobile devices";
-//    } else if (indexPath.row == 1){
-//        self.productViewController.title = @"Samsung mobile devices";
-//    } else if (indexPath.row == 2) {
-//        self.productViewController.title = @"Nokia mobile devices";
-//    } else if (indexPath.row == 3) {
-//        self.productViewController.title = @"Motorola mobile devices";
-//    }
+    self.productViewController.title = [[self.companyList objectAtIndex:indexPath.row] companyName];
+    self.productViewController.company = [self.companyList objectAtIndex:indexPath.row];
+
     
     [self.navigationController
         pushViewController:self.productViewController

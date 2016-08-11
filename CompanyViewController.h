@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Company.h"
+#import "Product.h"
 
 @class ProductViewController;
 
