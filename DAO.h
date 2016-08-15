@@ -10,4 +10,10 @@
 
 @interface DAO : NSObject
 
+@property (nonatomic, retain) NSMutableArray *companyList;
+
++ (instancetype)sharedInstance;
+
+- (void)createCompanies;
+
 @end
