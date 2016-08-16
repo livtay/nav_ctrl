@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Company.h"
 #import "Product.h"
+#import "AddNewCompanyViewController.h"
 
 @class ProductViewController;
 
@@ -16,6 +17,7 @@
 
 @property (nonatomic, retain) NSMutableArray *companyList;
 
-@property (nonatomic, retain) IBOutlet  ProductViewController * productViewController;
+@property (nonatomic, retain) IBOutlet ProductViewController *productViewController;
+@property (nonatomic, retain) IBOutlet AddNewCompanyViewController *addNewCompanyViewController;
 
 @end

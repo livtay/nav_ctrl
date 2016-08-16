@@ -11,11 +11,11 @@
 @interface Company : NSObject
 
 @property (strong, nonatomic) NSString *companyName;
-@property (strong, nonatomic) UIImage *companyLogo;
+@property (strong, nonatomic) NSString *companyLogo;
 @property (strong, nonatomic) NSNumber *stockPrice;
 @property (strong, nonatomic) NSString *stockName;
 @property (strong, nonatomic) NSMutableArray *products;
 
-- (instancetype)initWithCompanyName:(NSString *)companyName andLogo:(UIImage *)companyLogo;
+- (instancetype)initWithCompanyName:(NSString *)companyName andLogo:(NSString *)companyLogo;
 
 @end

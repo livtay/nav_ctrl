@@ -7,6 +7,7 @@
 //
 
 #import "ProductViewController.h"
+#import "AddNewProductViewController.h"
 
 @interface ProductViewController ()
 
@@ -33,7 +34,9 @@
     // Uncomment the following line to preserve selection between presentations.
      self.clearsSelectionOnViewWillAppear = NO;
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UIBarButtonItem *editButton = self.editButtonItem;
+    UIBarButtonItem *addBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addProduct)];
+    self.navigationItem.rightBarButtonItems = @[editButton, addBtn];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -76,7 +79,19 @@
     Product *product = [self.company.products objectAtIndex:[indexPath row]];
 
     cell.textLabel.text = product.productName;
-    cell.imageView.image = [UIImage imageNamed:product.imageName];
+    
+//    cell.imageView.image = [UIImage imageNamed:product.imageName];
+    
+    UIImage *productImage = [UIImage imageNamed:[[self.company.products objectAtIndex:[indexPath row]] imageName]];
+    if (productImage == nil) {
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSURL *documentsURL = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask][0];
+        NSURL *fileURL = [documentsURL URLByAppendingPathComponent:[[self.company.products objectAtIndex:[indexPath row]] productName]];
+        NSData *imageData = [NSData dataWithContentsOfURL:fileURL];
+        productImage = [UIImage imageWithData:imageData];
+    }
+    
+    [[cell imageView] setImage:productImage];
     
     return cell;
 }
@@ -103,6 +118,17 @@
     }   
 }
 
+-(void)addProduct {
+    
+    if (self.addNewProductViewController == nil) {
+        self.addNewProductViewController = [[AddNewProductViewController alloc] init];
+    }
+    
+    self.addNewProductViewController.title = @"Add New Product";
+    self.addNewProductViewController.company = self.company;
+    
+    [self.navigationController pushViewController:self.addNewProductViewController animated:YES];
+}
 
 
 // Override to support rearranging the table view.

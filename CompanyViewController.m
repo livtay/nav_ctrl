@@ -10,6 +10,7 @@
 #import "ProductViewController.h"
 #import "Product.h"
 #import "DAO.h"
+#import "AddNewCompanyViewController.h"
 
 @interface CompanyViewController ()
 
@@ -39,12 +40,19 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    
     self.dao = [DAO sharedInstance];
     [self.dao createCompanies];
     self.companyList = self.dao.companyList;
     
     self.title = @"Mobile device makers";
+    UIBarButtonItem *addBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addCompany)];
+    self.navigationItem.leftBarButtonItem = addBtn;
     
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,7 +86,17 @@
     }
 
     cell.textLabel.text = [[self.companyList objectAtIndex:[indexPath row]] companyName];
-    [[cell imageView] setImage:[[self.companyList objectAtIndex:[indexPath row]] companyLogo]];
+    
+    UIImage *logoImage = [UIImage imageNamed:[[self.companyList objectAtIndex:[indexPath row]] companyLogo]];
+    if (logoImage == nil) {
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSURL *documentsURL = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask][0];
+        NSURL *fileURL = [documentsURL URLByAppendingPathComponent:[[self.companyList objectAtIndex:[indexPath row]] companyName]];
+        NSData *imageData = [NSData dataWithContentsOfURL:fileURL];
+        logoImage = [UIImage imageWithData:imageData];
+    }
+    
+    [[cell imageView] setImage:logoImage];
     
     return cell;
 }
@@ -92,7 +110,6 @@
 }
 
 
-
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -102,7 +119,21 @@
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        
+       
+
     }   
+}
+
+-(void)addCompany {
+    
+    if (self.addNewCompanyViewController == nil) {
+        self.addNewCompanyViewController = [[AddNewCompanyViewController alloc] init];
+    }
+    
+    self.addNewCompanyViewController.title = @"Add New Company";
+    
+    [self.navigationController pushViewController:self.addNewCompanyViewController animated:YES];
 }
 
 

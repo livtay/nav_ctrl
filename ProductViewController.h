@@ -11,6 +11,7 @@
 #import "WebViewController.h"
 #import "CompanyViewController.h"
 #import "Product.h"
+#import "AddNewProductViewController.h"
 
 @interface ProductViewController : UITableViewController
 
@@ -18,6 +19,7 @@
 @property (strong, nonatomic) WebViewController *wVC;
 @property (strong, nonatomic) Company *company;
 //@property (strong, nonatomic) DAO *dao;
+@property (nonatomic, retain) IBOutlet AddNewProductViewController *addNewProductViewController;
 
 
 @end
