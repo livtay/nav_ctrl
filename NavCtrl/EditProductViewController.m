@@ -1,22 +1,19 @@
 //
-//  AddNewProductViewController.m
+//  EditProductViewController.m
 //  NavCtrl
 //
-//  Created by Olivia Taylor on 8/16/16.
+//  Created by Olivia Taylor on 8/17/16.
 //  Copyright © 2016 Aditya Narayan. All rights reserved.
 //
 
-#import "AddNewProductViewController.h"
-#import "ProductViewController.h"
-#import "Product.h"
-#import "DAO.h"
+#import "EditProductViewController.h"
 #define kOFFSET_FOR_KEYBOARD 80.0
 
-@interface AddNewProductViewController ()
+@interface EditProductViewController ()
 
 @end
 
-@implementation AddNewProductViewController
+@implementation EditProductViewController
 
 -(void)keyboardWillShow {
     // Animate the current view out of the way
@@ -85,29 +82,31 @@
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
     
-    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveNewProduct)];
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveEditedProduct)];
     self.navigationItem.rightBarButtonItem = saveButton;
+    self.editProductNameTextField.text = self.product.productName;
+    self.editProductUrlTextField.text = self.product.productUrl;
+    self.editProductImageTextField.text = self.product.imageName;
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-
+    // Dispose of any resources that can be recreated.
 }
 
-- (void)saveNewProduct {
-    NSString *newProductName = self.addNewProductTextField.text;
-    NSString *newProductUrl = self.addNewProductUrlTextField.text;
-    NSString *newProductImageUrl = self.addNewProductImageUrlTextField.text;
-    
-    Product *newProduct = [[Product alloc] initWithProductName:newProductName andUrl:newProductUrl andImageName:newProductImageUrl];
-    [self.company.products addObject:newProduct];
+- (void)saveEditedProduct {
+    self.product.productName = self.editProductNameTextField.text;
+    self.product.productUrl = self.editProductUrlTextField.text;
+    self.product.imageName = self.editProductImageTextField.text;
     [self.navigationController popToRootViewControllerAnimated:YES];
+    
 }
 
 - (void)dealloc {
-    [self.addNewProductTextField release];
-    [self.addNewProductUrlTextField release];
-    [self.addNewProductImageUrlTextField release];
+    [self.editProductNameTextField release];
+    [self.editProductUrlTextField release];
+    [self.editProductImageTextField release];
     [super dealloc];
 }
 @end

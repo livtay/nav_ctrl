@@ -1,22 +1,20 @@
 //
-//  AddNewProductViewController.m
+//  EditCompanyViewController.m
 //  NavCtrl
 //
-//  Created by Olivia Taylor on 8/16/16.
+//  Created by Olivia Taylor on 8/17/16.
 //  Copyright © 2016 Aditya Narayan. All rights reserved.
 //
 
-#import "AddNewProductViewController.h"
-#import "ProductViewController.h"
-#import "Product.h"
+#import "EditCompanyViewController.h"
 #import "DAO.h"
 #define kOFFSET_FOR_KEYBOARD 80.0
 
-@interface AddNewProductViewController ()
+@interface EditCompanyViewController ()
 
 @end
 
-@implementation AddNewProductViewController
+@implementation EditCompanyViewController
 
 -(void)keyboardWillShow {
     // Animate the current view out of the way
@@ -85,29 +83,31 @@
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
     
-    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveNewProduct)];
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveEditedCompany)];
     self.navigationItem.rightBarButtonItem = saveButton;
+    self.editCompanyTextField.text = self.company.companyName;
+//    self.editSymbolTextField.text = self.company.companySymbol;
+    self.editImageUrlTextField.text = self.company.companyLogo;
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-
+    // Dispose of any resources that can be recreated.
 }
 
-- (void)saveNewProduct {
-    NSString *newProductName = self.addNewProductTextField.text;
-    NSString *newProductUrl = self.addNewProductUrlTextField.text;
-    NSString *newProductImageUrl = self.addNewProductImageUrlTextField.text;
-    
-    Product *newProduct = [[Product alloc] initWithProductName:newProductName andUrl:newProductUrl andImageName:newProductImageUrl];
-    [self.company.products addObject:newProduct];
+- (void)saveEditedCompany {
+    self.company.companyName = self.editCompanyTextField.text;
+//    self.company.companySymbol = self.editSymbolTextField.text;
+    self.company.companyLogo = self.editImageUrlTextField.text;
     [self.navigationController popToRootViewControllerAnimated:YES];
+    
 }
 
 - (void)dealloc {
-    [self.addNewProductTextField release];
-    [self.addNewProductUrlTextField release];
-    [self.addNewProductImageUrlTextField release];
+    [self.editCompanyTextField release];
+    [self.editSymbolTextField release];
+    [self.editImageUrlTextField release];
     [super dealloc];
 }
 @end

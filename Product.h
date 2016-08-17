@@ -12,7 +12,7 @@
 @interface Product : NSObject
 
 @property (strong, nonatomic) NSString *productName;
-@property (strong, nonatomic) NSURL *productUrl;
+@property (strong, nonatomic) NSString *productUrl;
 @property (strong, nonatomic) NSString *imageName;
 
 - (instancetype)initWithProductName:(NSString *)productName andUrl:(NSString *)productUrl andImageName:(NSString *)imageName;

@@ -44,10 +44,11 @@
     self.dao = [DAO sharedInstance];
     [self.dao createCompanies];
     self.companyList = self.dao.companyList;
-    
+    self.tableView.allowsSelectionDuringEditing = true;
     self.title = @"Mobile device makers";
     UIBarButtonItem *addBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addCompany)];
     self.navigationItem.leftBarButtonItem = addBtn;
+    
     
 }
 
@@ -137,7 +138,6 @@
 }
 
 
-
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
@@ -164,14 +164,20 @@
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    self.productViewController.title = [[self.companyList objectAtIndex:indexPath.row] companyName];
-    self.productViewController.company = [self.companyList objectAtIndex:indexPath.row];
-
-    
-    [self.navigationController
-        pushViewController:self.productViewController
-        animated:YES];
+    NSString *editTitle = [NSString stringWithFormat:@"Edit Company: %@", [[self.companyList objectAtIndex:indexPath.row] companyName]];
+    if (self.editing) {
+        self.editCompanyViewController = [[EditCompanyViewController alloc] init];
+        self.editCompanyViewController.title = editTitle;
+        self.editCompanyViewController.company = [self.companyList objectAtIndex:indexPath.row];
+        [self.navigationController pushViewController:self.editCompanyViewController
+                                             animated:YES];
+        
+    } else {
+        self.productViewController.title = [[self.companyList objectAtIndex:indexPath.row] companyName];
+        self.productViewController.company = [self.companyList objectAtIndex:indexPath.row];
+        [self.navigationController pushViewController:self.productViewController
+                                             animated:YES];
+    }
     
 
 }

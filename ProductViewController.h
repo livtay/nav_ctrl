@@ -12,6 +12,7 @@
 #import "CompanyViewController.h"
 #import "Product.h"
 #import "AddNewProductViewController.h"
+#import "EditProductViewController.h"
 
 @interface ProductViewController : UITableViewController
 
@@ -20,6 +21,6 @@
 @property (strong, nonatomic) Company *company;
 //@property (strong, nonatomic) DAO *dao;
 @property (nonatomic, retain) IBOutlet AddNewProductViewController *addNewProductViewController;
-
+@property (nonatomic, retain) IBOutlet EditProductViewController *editProductViewController;
 
 @end

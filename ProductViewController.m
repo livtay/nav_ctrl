@@ -9,6 +9,7 @@
 #import "ProductViewController.h"
 #import "AddNewProductViewController.h"
 
+
 @interface ProductViewController ()
 
 //@property (strong, nonatomic) NSMutableDictionary *productsForCompany;
@@ -37,6 +38,7 @@
     UIBarButtonItem *editButton = self.editButtonItem;
     UIBarButtonItem *addBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addProduct)];
     self.navigationItem.rightBarButtonItems = @[editButton, addBtn];
+    self.tableView.allowsSelectionDuringEditing = true;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -155,13 +157,19 @@
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-
-    self.wVC.webUrl = [self.company.products[indexPath.row] productUrl];
-    // Push the view controller.
-    [self.navigationController pushViewController:self.wVC animated:YES];
-
+    NSString *editTitle = [NSString stringWithFormat:@"Edit Product: %@", [[self.company.products objectAtIndex:indexPath.row] productName]];
+    if (self.editing) {
+        self.editProductViewController = [[EditProductViewController alloc] init];
+        self.editProductViewController.title = editTitle;
+        self.editProductViewController.product = [self.company.products objectAtIndex:indexPath.row];
+        [self.navigationController pushViewController:self.editProductViewController
+                                             animated:YES];
+        
+    } else {
+        NSURL *prodUrl = [NSURL URLWithString:[self.company.products[indexPath.row] productUrl]];
+        self.wVC.webUrl = prodUrl;
+        [self.navigationController pushViewController:self.wVC animated:YES];
+    }
 
 }
 

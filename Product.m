@@ -35,7 +35,7 @@
         }];
         [downloadTask resume];
         
-        self.productUrl = [NSURL URLWithString:productUrl];
+        self.productUrl = productUrl;
         self.imageName = imageName;
         return self;
     }
