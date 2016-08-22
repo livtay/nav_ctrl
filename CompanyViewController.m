@@ -50,16 +50,27 @@
     self.navigationItem.leftBarButtonItem = addBtn;
     
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadTable)
+                                                 name:@"Data Downloaded"
+                                               object:nil];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [self.tableView reloadData];
+    
+    [[DAO sharedInstance] downloadStockQuotes];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)reloadTable {
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -85,8 +96,9 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-
-    cell.textLabel.text = [[self.companyList objectAtIndex:[indexPath row]] companyName];
+    
+    NSString *cellTextString = [NSString stringWithFormat:@"%@ (%@) - $%@", [[self.companyList objectAtIndex:[indexPath row]] companyName], [[self.companyList objectAtIndex:[indexPath row]] stockSymbol], [[self.companyList objectAtIndex:[indexPath row]] stockPrice]];
+    cell.textLabel.text = cellTextString;
     
     UIImage *logoImage = [UIImage imageNamed:[[self.companyList objectAtIndex:[indexPath row]] companyLogo]];
     if (logoImage == nil) {
@@ -180,6 +192,15 @@
     }
     
 
+}
+
+- (void) dealloc
+{
+    // If you don't remove yourself as an observer, the Notification Center
+    // will continue to try and send notification objects to the deallocated
+    // object.
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super dealloc];
 }
 
 

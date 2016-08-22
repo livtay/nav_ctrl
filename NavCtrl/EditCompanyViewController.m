@@ -86,7 +86,7 @@
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveEditedCompany)];
     self.navigationItem.rightBarButtonItem = saveButton;
     self.editCompanyTextField.text = self.company.companyName;
-//    self.editSymbolTextField.text = self.company.companySymbol;
+    self.editSymbolTextField.text = self.company.stockSymbol;
     self.editImageUrlTextField.text = self.company.companyLogo;
     
 }
@@ -98,7 +98,7 @@
 
 - (void)saveEditedCompany {
     self.company.companyName = self.editCompanyTextField.text;
-//    self.company.companySymbol = self.editSymbolTextField.text;
+    self.company.stockSymbol = self.editSymbolTextField.text;
     self.company.companyLogo = self.editImageUrlTextField.text;
     [self.navigationController popToRootViewControllerAnimated:YES];
     

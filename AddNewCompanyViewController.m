@@ -96,12 +96,13 @@
 
 - (void)saveNewCompany {
     NSString *newCompanyName = self.addCompanyNameTextField.text;
-//    NSString *newStockSymbol = self.addStockSymbolTextField.text;
+    NSString *newStockSymbol = self.addStockSymbolTextField.text;
     NSString *newImageUrl = self.addImageUrlTextField.text;
     
-    Company *newCompany = [[Company alloc] initWithCompanyName:newCompanyName andLogo:newImageUrl];
+    Company *newCompany = [[Company alloc] initWithCompanyName:newCompanyName andStockSymbol:newStockSymbol andLogo:newImageUrl];
     [[[DAO sharedInstance] companyList] addObject:newCompany];
     [self.navigationController popToRootViewControllerAnimated:YES];
+    [[DAO sharedInstance] downloadStockQuotes];
 
     
 }

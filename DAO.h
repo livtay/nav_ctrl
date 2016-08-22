@@ -15,5 +15,7 @@
 + (instancetype)sharedInstance;
 
 - (void)createCompanies;
+- (void)downloadImageUrl:(NSString *)imageUrl andName:(NSString *)name;
+- (void)downloadStockQuotes;
 
 @end

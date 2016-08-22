@@ -39,6 +39,11 @@
     UIBarButtonItem *addBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addProduct)];
     self.navigationItem.rightBarButtonItems = @[editButton, addBtn];
     self.tableView.allowsSelectionDuringEditing = true;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadTable)
+                                                 name:@"Data Downloaded"
+                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -52,6 +57,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)reloadTable {
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -173,6 +182,15 @@
 
 }
 
+
+- (void) dealloc
+{
+    // If you don't remove yourself as an observer, the Notification Center
+    // will continue to try and send notification objects to the deallocated
+    // object.
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super dealloc];
+}
 
 @end
 
