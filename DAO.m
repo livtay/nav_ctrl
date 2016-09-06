@@ -114,33 +114,33 @@
 
 - (void)createCompanies {
         
-        Company *apple = [self addCompanyWithName:@"Apple mobile devices" andStockSymbol:@"AAPL" andLogo:@"apple.png"];
-        self.company = apple;
-         [self addProductWithName:@"iPad" andUrl:@"https://www.apple.com/ipad/" andImage:@"apple.png" toCompany:apple.companyId];
-        [self addProductWithName:@"iPod Touch" andUrl:@"https://www.apple.com/ipod-touch/" andImage:@"apple.png" toCompany:apple.companyId];
-        [self addProductWithName:@"iPhone" andUrl:@"https://www.apple.com/iphone/" andImage:@"apple.png" toCompany:apple.companyId];
-        
-        Company *samsung = [self addCompanyWithName:@"Samsung mobile devices" andStockSymbol:@"SSNLF" andLogo:@"Samsung.png"];
-    self.company = samsung;
-        [self addProductWithName:@"Galaxy S4" andUrl:@"https://www.cnet.com/products/samsung-galaxy-s4/" andImage:@"Samsung.png" toCompany:samsung.companyId];
-        [self addProductWithName:@"Galaxy Note" andUrl:@"https://www.cnet.com/products/samsung-galaxy-note-7-preview/" andImage:@"Samsung.png" toCompany:samsung.companyId];
-        [self addProductWithName:@"Galaxy Tab" andUrl:@"https://www.cnet.com/products/samsung-galaxy-tab-e/" andImage:@"Samsung.png" toCompany:samsung.companyId];
-        
-        Company *nokia = [self addCompanyWithName:@"Nokia mobile devices" andStockSymbol:@"NOK" andLogo:@"Nokialogo.png"];
-    self.company = nokia;
-        [self addProductWithName:@"Lumia 1520" andUrl:@"https://www.microsoft.com/en-us/mobile/phone/lumia1520/" andImage:@"Nokialogo.png" toCompany:nokia.companyId];
-        [self addProductWithName:@"Lumia 650" andUrl:@"https://www.microsoft.com/en-us/mobile/es/lumia650/" andImage:@"Nokialogo.png" toCompany:nokia.companyId];
-        [self addProductWithName:@"N1" andUrl:@"https://www.cnet.com/products/nokia-n1/" andImage:@"Nokialogo.png" toCompany:nokia.companyId];
-        
-        Company *motorola = [self addCompanyWithName:@"Motorola mobile devices" andStockSymbol:@"MSI" andLogo:@"motologo.png"];
-    self.company = motorola;
-        [self addProductWithName:@"Moto Z Droid" andUrl:@"https://www.motorola.com/us/products/moto-z-droid-edition" andImage:@"motologo.png" toCompany:motorola.companyId];
-        [self addProductWithName:@"Moto X Pure Edition" andUrl:@"https://www.motorola.com/us/products/moto-x-pure-edition" andImage:@"motologo.png" toCompany:motorola.companyId];
-        [self addProductWithName:@"XOOM Tablet" andUrl:@"https://www.cnet.com/products/motorola-with-wi-fi/" andImage:@"motologo.png" toCompany:motorola.companyId];
+    Company *apple = [self addCompanyWithName:@"Apple mobile devices" andStockSymbol:@"AAPL" andLogo:@"apple.png"];
+    self.company = apple;
+    [self addProductWithName:@"iPad" andUrl:@"https://www.apple.com/ipad/" andImage:@"apple.png" toCompany:apple.companyId];
+    [self addProductWithName:@"iPod Touch" andUrl:@"https://www.apple.com/ipod-touch/" andImage:@"apple.png" toCompany:apple.companyId];
+    [self addProductWithName:@"iPhone" andUrl:@"https://www.apple.com/iphone/" andImage:@"apple.png" toCompany:apple.companyId];
     
-        [self downloadStockQuotes];
-        
-        [self.context save:nil];
+    Company *samsung = [self addCompanyWithName:@"Samsung mobile devices" andStockSymbol:@"SSNLF" andLogo:@"Samsung.png"];
+    self.company = samsung;
+    [self addProductWithName:@"Galaxy S4" andUrl:@"https://www.cnet.com/products/samsung-galaxy-s4/" andImage:@"Samsung.png" toCompany:samsung.companyId];
+    [self addProductWithName:@"Galaxy Note" andUrl:@"https://www.cnet.com/products/samsung-galaxy-note-7-preview/" andImage:@"Samsung.png" toCompany:samsung.companyId];
+    [self addProductWithName:@"Galaxy Tab" andUrl:@"https://www.cnet.com/products/samsung-galaxy-tab-e/" andImage:@"Samsung.png" toCompany:samsung.companyId];
+    
+    Company *nokia = [self addCompanyWithName:@"Nokia mobile devices" andStockSymbol:@"NOK" andLogo:@"Nokialogo.png"];
+    self.company = nokia;
+    [self addProductWithName:@"Lumia 1520" andUrl:@"https://www.microsoft.com/en-us/mobile/phone/lumia1520/" andImage:@"Nokialogo.png" toCompany:nokia.companyId];
+    [self addProductWithName:@"Lumia 650" andUrl:@"https://www.microsoft.com/en-us/mobile/es/lumia650/" andImage:@"Nokialogo.png" toCompany:nokia.companyId];
+    [self addProductWithName:@"N1" andUrl:@"https://www.cnet.com/products/nokia-n1/" andImage:@"Nokialogo.png" toCompany:nokia.companyId];
+    
+    Company *motorola = [self addCompanyWithName:@"Motorola mobile devices" andStockSymbol:@"MSI" andLogo:@"motologo.png"];
+    self.company = motorola;
+    [self addProductWithName:@"Moto Z Droid" andUrl:@"https://www.motorola.com/us/products/moto-z-droid-edition" andImage:@"motologo.png" toCompany:motorola.companyId];
+    [self addProductWithName:@"Moto X Pure Edition" andUrl:@"https://www.motorola.com/us/products/moto-x-pure-edition" andImage:@"motologo.png" toCompany:motorola.companyId];
+    [self addProductWithName:@"XOOM Tablet" andUrl:@"https://www.cnet.com/products/motorola-with-wi-fi/" andImage:@"motologo.png" toCompany:motorola.companyId];
+    
+    [self downloadStockQuotes];
+    
+    [self.context save:nil];
 }
 
 
@@ -160,7 +160,8 @@
     } else {
         for(ManagedCompany *mc in result){
             //                NSLog(@"Product Count %lu", [mc.products count]);
-            Company *company = [[Company alloc]initWithCompanyName:mc.companyName andStockSymbol:mc.stockSymbol andLogo:[mc valueForKey:@"companyLogo"]];
+            Company *company = [[Company alloc]initWithCompanyName:mc.companyName andStockSymbol:mc.stockSymbol andLogo:[mc valueForKey:@"companyLogo"] andId:[mc.companyId intValue]];
+            
             [self.companyList addObject:company];
             
             for (ManagedProduct *mp in mc.products) {
@@ -206,6 +207,44 @@
          object:self];
     });
 }
+
+- (void)deleteCompany:(int)companyId {
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSPredicate *p = [NSPredicate predicateWithFormat:@"companyId == %d", companyId];
+    [request setPredicate:p];
+    NSEntityDescription *e = [[self.model entitiesByName] objectForKey:@"Company"];
+    [request setEntity:e];
+    NSError *error = nil;
+    NSArray *result = [self.context executeFetchRequest:request error:&error];
+    if (error) {
+        [NSException raise:@"Fetch Failed" format:@"Reason: %@", [error localizedDescription]];
+    } else if (result.count >= 1) {
+        NSManagedObject *managedCompany = [result objectAtIndex:0];
+        [self.context deleteObject:managedCompany];
+        [self.context save:nil];
+    }
+}
+
+- (void)deleteProduct:(NSString *)productName {
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSPredicate *p = [NSPredicate predicateWithFormat:@"productName == %@", productName];
+    [request setPredicate:p];
+    NSEntityDescription *e = [[self.model entitiesByName] objectForKey:@"Product"];
+    [request setEntity:e];
+    NSError *error = nil;
+    NSArray *result = [self.context executeFetchRequest:request error:&error];
+    if(error){
+        [NSException raise:@"Fetch Failed" format:@"Reason: %@", [error localizedDescription]];
+    } else if (result.count >= 1) {
+        NSManagedObject *managedProduct = [result objectAtIndex:0];
+        [self.context deleteObject:managedProduct];
+        [self.context save:nil];
+    }
+}
+
+
 
 - (void)downloadImageUrl:(NSString *)imageUrl andName:(NSString *)name {
     

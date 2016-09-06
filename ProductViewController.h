@@ -13,6 +13,7 @@
 #import "Product.h"
 #import "AddNewProductViewController.h"
 #import "EditProductViewController.h"
+#import "DAO.h"
 
 @interface ProductViewController : UITableViewController
 

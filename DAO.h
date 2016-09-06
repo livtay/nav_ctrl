@@ -24,5 +24,7 @@
 - (void)addProductWithName:(NSString *)newProductName andUrl:(NSString *)newProductUrl andImage:(NSString *)newProductImageUrl toCompany:(int)companyId;
 - (void)loadAllCompanies;
 - (void)loadAllProducts;
+- (void)deleteProduct:(NSString *)productName;
+- (void)deleteCompany:(int)companyId;
 
 @end

@@ -11,6 +11,39 @@
 
 @implementation Company
 
+- (instancetype)initWithCompanyName:(NSString *)companyName andStockSymbol:(NSString *)stockSymbol andLogo:(NSString *)companyLogo andId:(int )companyId{
+    self = [super init];
+    if (self) {
+        self.companyName = companyName;
+        
+        //Download image
+        //save to file with filename that matches company name
+        //load images in the table view (cellforrrowatindexpath) based on the image having the same name as the company
+        
+        //check if the image file already exists in the documents directory
+        //if not, download it.
+        //if it does exist, don't download it.
+        //        NSFileManager *fileManager = [NSFileManager defaultManager];
+        //        NSURL *documentsURL = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask][0];
+        //        NSURL *fileURL = [documentsURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg", companyName]];
+        //        NSString *fileUrlString = [fileURL absoluteString];
+        
+        UIImage *logoImage = [UIImage imageNamed:companyLogo];
+        if (logoImage == nil) {
+            [[DAO sharedInstance] downloadImageUrl:companyLogo andName:companyName];
+        }
+        
+        _stockSymbol = [stockSymbol retain];
+        _companyLogo = [companyLogo retain];
+        _products = [[[NSMutableArray alloc] init] retain];
+        
+        _companyId = companyId;
+          return self;
+    }
+    return nil;
+  
+}
+
 - (instancetype)initWithCompanyName:(NSString *)companyName andStockSymbol:(NSString *)stockSymbol andLogo:(NSString *)companyLogo {
     self = [super init];
     if (self) {

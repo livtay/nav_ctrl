@@ -121,8 +121,13 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        Product *product = [self.company.products objectAtIndex:[indexPath row]];
+        [[DAO sharedInstance] deleteProduct:product.productName];
+        
         [self.company.products removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
         
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
@@ -178,7 +183,6 @@
     } else {
         NSURL *prodUrl = [NSURL URLWithString:[self.company.products[indexPath.row] productUrl]];
         self.wVC.webUrl = prodUrl;
-//        self.addNewProductViewController.company = [self.company.products[indexPath.row] company];
         [self.navigationController pushViewController:self.wVC animated:YES];
     }
 
