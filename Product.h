@@ -14,7 +14,8 @@
 @property (strong, nonatomic) NSString *productName;
 @property (strong, nonatomic) NSString *productUrl;
 @property (strong, nonatomic) NSString *imageName;
+@property int companyId;
 
-- (instancetype)initWithProductName:(NSString *)productName andUrl:(NSString *)productUrl andImageName:(NSString *)imageName;
+- (instancetype)initWithProductName:(NSString *)productName andUrl:(NSString *)productUrl andImageName:(NSString *)imageName toCompany:(int)companyId;
 
 @end

@@ -99,8 +99,8 @@
     NSString *newStockSymbol = self.addStockSymbolTextField.text;
     NSString *newImageUrl = self.addImageUrlTextField.text;
     
-    Company *newCompany = [[Company alloc] initWithCompanyName:newCompanyName andStockSymbol:newStockSymbol andLogo:newImageUrl];
-    [[[DAO sharedInstance] companyList] addObject:newCompany];
+    [[DAO sharedInstance] addCompanyWithName:newCompanyName andStockSymbol:newStockSymbol andLogo:newImageUrl];
+    
     [self.navigationController popToRootViewControllerAnimated:YES];
     [[DAO sharedInstance] downloadStockQuotes];
 

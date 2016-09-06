@@ -42,8 +42,6 @@
     
     
     self.dao = [DAO sharedInstance];
-    [self.dao createCompanies];
-    self.companyList = self.dao.companyList;
     self.tableView.allowsSelectionDuringEditing = true;
     self.title = @"Mobile device makers";
     UIBarButtonItem *addBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addCompany)];
@@ -52,13 +50,25 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadTable)
-                                                 name:@"Data Downloaded"
+                                                 name:@"Data Updated"
                                                object:nil];
+    static NSString* const hasRunAppOnceKey = @"hasRunAppOnceKey";
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults boolForKey:hasRunAppOnceKey]) {
+        [[DAO sharedInstance] createCompanies];
+        [[DAO sharedInstance] loadAllProducts];
+        [defaults setBool:YES forKey:hasRunAppOnceKey];
+    } else {
+        [[DAO sharedInstance] loadAllCompanies];
+        [[DAO sharedInstance] loadAllProducts];
+    }
+    self.companyList = self.dao.companyList;
+
     
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    [self.tableView reloadData];
+    [self reloadTable];
     
     [[DAO sharedInstance] downloadStockQuotes];
 }
@@ -100,6 +110,7 @@
     NSString *cellTextString = [NSString stringWithFormat:@"%@ (%@) - $%@", [[self.companyList objectAtIndex:[indexPath row]] companyName], [[self.companyList objectAtIndex:[indexPath row]] stockSymbol], [[self.companyList objectAtIndex:[indexPath row]] stockPrice]];
     cell.textLabel.text = cellTextString;
     
+    
     UIImage *logoImage = [UIImage imageNamed:[[self.companyList objectAtIndex:[indexPath row]] companyLogo]];
     if (logoImage == nil) {
         NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -129,6 +140,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.companyList removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+         
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -187,6 +199,7 @@
     } else {
         self.productViewController.title = [[self.companyList objectAtIndex:indexPath.row] companyName];
         self.productViewController.company = [self.companyList objectAtIndex:indexPath.row];
+        self.dao.company = [self.companyList objectAtIndex:indexPath.row];
         [self.navigationController pushViewController:self.productViewController
                                              animated:YES];
     }

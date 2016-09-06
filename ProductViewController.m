@@ -123,6 +123,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.company.products removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -177,6 +178,7 @@
     } else {
         NSURL *prodUrl = [NSURL URLWithString:[self.company.products[indexPath.row] productUrl]];
         self.wVC.webUrl = prodUrl;
+//        self.addNewProductViewController.company = [self.company.products[indexPath.row] company];
         [self.navigationController pushViewController:self.wVC animated:YES];
     }
 

@@ -98,9 +98,10 @@
     NSString *newProductName = self.addNewProductTextField.text;
     NSString *newProductUrl = self.addNewProductUrlTextField.text;
     NSString *newProductImageUrl = self.addNewProductImageUrlTextField.text;
+    int newProductCompany = self.company.companyId;
     
-    Product *newProduct = [[Product alloc] initWithProductName:newProductName andUrl:newProductUrl andImageName:newProductImageUrl];
-    [self.company.products addObject:newProduct];
+    [[DAO sharedInstance] addProductWithName:newProductName andUrl:newProductUrl andImage:newProductImageUrl toCompany:newProductCompany] ;
+    
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4802C8C31D78A50E0055D7B6 /* ManagedCompany+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 4802C8BC1D78A50E0055D7B6 /* ManagedCompany+CoreDataProperties.m */; };
+		4802C8C41D78A50E0055D7B6 /* ManagedCompany.m in Sources */ = {isa = PBXBuildFile; fileRef = 4802C8BE1D78A50E0055D7B6 /* ManagedCompany.m */; };
+		4802C8C51D78A50E0055D7B6 /* ManagedProduct+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 4802C8C01D78A50E0055D7B6 /* ManagedProduct+CoreDataProperties.m */; };
+		4802C8C61D78A50E0055D7B6 /* ManagedProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 4802C8C21D78A50E0055D7B6 /* ManagedProduct.m */; };
+		48152B221D6F51C200AB0653 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 48152B201D6F51C200AB0653 /* Model.xcdatamodeld */; };
 		481A53511D5B9BBE00DB26DB /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 481A53501D5B9BBE00DB26DB /* WebViewController.m */; };
 		482640EC1D64CC500028BF08 /* EditCompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 482640EA1D64CC500028BF08 /* EditCompanyViewController.m */; };
 		482640ED1D64CC500028BF08 /* EditCompanyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 482640EB1D64CC500028BF08 /* EditCompanyViewController.xib */; };
@@ -19,6 +24,7 @@
 		48551B451D637AA400DA3B19 /* AddNewCompanyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48551B431D637AA400DA3B19 /* AddNewCompanyViewController.xib */; };
 		48551B491D63B0A900DA3B19 /* AddNewProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48551B471D63B0A900DA3B19 /* AddNewProductViewController.m */; };
 		48551B4A1D63B0A900DA3B19 /* AddNewProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48551B481D63B0A900DA3B19 /* AddNewProductViewController.xib */; };
+		4867EB681D749543009165C5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4867EB671D749543009165C5 /* CoreData.framework */; };
 		486BAD631D5A6A400091A706 /* apple.png in Resources */ = {isa = PBXBuildFile; fileRef = 486BAD621D5A6A400091A706 /* apple.png */; };
 		486BAD671D5A6B070091A706 /* Samsung.png in Resources */ = {isa = PBXBuildFile; fileRef = 486BAD661D5A6B070091A706 /* Samsung.png */; };
 		486BAD6D1D5A6C530091A706 /* motorola2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 486BAD6C1D5A6C530091A706 /* motorola2.jpg */; };
@@ -52,6 +58,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4802C8BB1D78A50E0055D7B6 /* ManagedCompany+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ManagedCompany+CoreDataProperties.h"; path = "../ManagedCompany+CoreDataProperties.h"; sourceTree = "<group>"; };
+		4802C8BC1D78A50E0055D7B6 /* ManagedCompany+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ManagedCompany+CoreDataProperties.m"; path = "../ManagedCompany+CoreDataProperties.m"; sourceTree = "<group>"; };
+		4802C8BD1D78A50E0055D7B6 /* ManagedCompany.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ManagedCompany.h; path = ../ManagedCompany.h; sourceTree = "<group>"; };
+		4802C8BE1D78A50E0055D7B6 /* ManagedCompany.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ManagedCompany.m; path = ../ManagedCompany.m; sourceTree = "<group>"; };
+		4802C8BF1D78A50E0055D7B6 /* ManagedProduct+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ManagedProduct+CoreDataProperties.h"; path = "../ManagedProduct+CoreDataProperties.h"; sourceTree = "<group>"; };
+		4802C8C01D78A50E0055D7B6 /* ManagedProduct+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ManagedProduct+CoreDataProperties.m"; path = "../ManagedProduct+CoreDataProperties.m"; sourceTree = "<group>"; };
+		4802C8C11D78A50E0055D7B6 /* ManagedProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ManagedProduct.h; path = ../ManagedProduct.h; sourceTree = "<group>"; };
+		4802C8C21D78A50E0055D7B6 /* ManagedProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ManagedProduct.m; path = ../ManagedProduct.m; sourceTree = "<group>"; };
+		48152B211D6F51C200AB0653 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		481A534F1D5B9BBE00DB26DB /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebViewController.h; path = ../WebViewController.h; sourceTree = "<group>"; };
 		481A53501D5B9BBE00DB26DB /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebViewController.m; path = ../WebViewController.m; sourceTree = "<group>"; };
 		482640E91D64CC500028BF08 /* EditCompanyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCompanyViewController.h; sourceTree = "<group>"; };
@@ -72,6 +87,7 @@
 		48551B461D63B0A900DA3B19 /* AddNewProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewProductViewController.h; sourceTree = "<group>"; };
 		48551B471D63B0A900DA3B19 /* AddNewProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewProductViewController.m; sourceTree = "<group>"; };
 		48551B481D63B0A900DA3B19 /* AddNewProductViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddNewProductViewController.xib; sourceTree = "<group>"; };
+		4867EB671D749543009165C5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		486BAD621D5A6A400091A706 /* apple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apple.png; sourceTree = "<group>"; };
 		486BAD661D5A6B070091A706 /* Samsung.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Samsung.png; sourceTree = "<group>"; };
 		486BAD6C1D5A6C530091A706 /* motorola2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = motorola2.jpg; path = NavCtrlTests/motorola2.jpg; sourceTree = SOURCE_ROOT; };
@@ -105,6 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4867EB681D749543009165C5 /* CoreData.framework in Frameworks */,
 				48A656B718163BF200746D36 /* CoreGraphics.framework in Frameworks */,
 				48A656B918163BF200746D36 /* UIKit.framework in Frameworks */,
 				48A656B518163BF200746D36 /* Foundation.framework in Frameworks */,
@@ -124,6 +141,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		48152B231D6F589300AB0653 /* DAO */ = {
+			isa = PBXGroup;
+			children = (
+				482A5F431D5D185B0061A009 /* DAO.h */,
+				482A5F441D5D185B0061A009 /* DAO.m */,
+			);
+			name = DAO;
+			sourceTree = "<group>";
+		};
+		48152B241D6F58AB00AB0653 /* WebViewController */ = {
+			isa = PBXGroup;
+			children = (
+				481A534F1D5B9BBE00DB26DB /* WebViewController.h */,
+				481A53501D5B9BBE00DB26DB /* WebViewController.m */,
+			);
+			name = WebViewController;
+			sourceTree = "<group>";
+		};
+		48152B251D6F5AC000AB0653 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				48152B201D6F51C200AB0653 /* Model.xcdatamodeld */,
+				4802C8BB1D78A50E0055D7B6 /* ManagedCompany+CoreDataProperties.h */,
+				4802C8BC1D78A50E0055D7B6 /* ManagedCompany+CoreDataProperties.m */,
+				4802C8BD1D78A50E0055D7B6 /* ManagedCompany.h */,
+				4802C8BE1D78A50E0055D7B6 /* ManagedCompany.m */,
+				4802C8BF1D78A50E0055D7B6 /* ManagedProduct+CoreDataProperties.h */,
+				4802C8C01D78A50E0055D7B6 /* ManagedProduct+CoreDataProperties.m */,
+				4802C8C11D78A50E0055D7B6 /* ManagedProduct.h */,
+				4802C8C21D78A50E0055D7B6 /* ManagedProduct.m */,
+			);
+			name = "Core Data";
+			sourceTree = "<group>";
+		};
 		483796CB1BCBF7A00062D5AB /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,14 +198,10 @@
 			children = (
 				48A656E818163F8700746D36 /* ProductViewController.h */,
 				48A656E918163F8700746D36 /* ProductViewController.m */,
-				481A534F1D5B9BBE00DB26DB /* WebViewController.h */,
-				481A53501D5B9BBE00DB26DB /* WebViewController.m */,
 				482A5F3D1D5CDD5D0061A009 /* Company.h */,
 				482A5F3E1D5CDD5D0061A009 /* Company.m */,
 				482A5F401D5CDD6A0061A009 /* Product.h */,
 				482A5F411D5CDD6A0061A009 /* Product.m */,
-				482A5F431D5D185B0061A009 /* DAO.h */,
-				482A5F441D5D185B0061A009 /* DAO.m */,
 				48551B411D637AA400DA3B19 /* AddNewCompanyViewController.h */,
 				48551B421D637AA400DA3B19 /* AddNewCompanyViewController.m */,
 				48551B431D637AA400DA3B19 /* AddNewCompanyViewController.xib */,
@@ -193,6 +240,7 @@
 		48A656B318163BF200746D36 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4867EB671D749543009165C5 /* CoreData.framework */,
 				48A656B418163BF200746D36 /* Foundation.framework */,
 				48A656B618163BF200746D36 /* CoreGraphics.framework */,
 				48A656B818163BF200746D36 /* UIKit.framework */,
@@ -207,6 +255,9 @@
 				483796CB1BCBF7A00062D5AB /* AppDelegate */,
 				483796CC1BCBF7C70062D5AB /* ParentViewController */,
 				483796CD1BCBF7EB0062D5AB /* ProductViewController */,
+				48152B241D6F58AB00AB0653 /* WebViewController */,
+				48152B231D6F589300AB0653 /* DAO */,
+				48152B251D6F5AC000AB0653 /* Core Data */,
 				48A656C618163BF200746D36 /* Images.xcassets */,
 				48A656E518163C1B00746D36 /* CompanyViewController.xib */,
 				48A656BB18163BF200746D36 /* Supporting Files */,
@@ -360,12 +411,17 @@
 				481A53511D5B9BBE00DB26DB /* WebViewController.m in Sources */,
 				482A5F451D5D185B0061A009 /* DAO.m in Sources */,
 				48551B441D637AA400DA3B19 /* AddNewCompanyViewController.m in Sources */,
+				4802C8C61D78A50E0055D7B6 /* ManagedProduct.m in Sources */,
 				48A656C518163BF200746D36 /* NavControllerAppDelegate.m in Sources */,
 				48A656C118163BF200746D36 /* main.m in Sources */,
 				482640F11D64F9430028BF08 /* EditProductViewController.m in Sources */,
+				4802C8C41D78A50E0055D7B6 /* ManagedCompany.m in Sources */,
+				4802C8C31D78A50E0055D7B6 /* ManagedCompany+CoreDataProperties.m in Sources */,
 				48A656EB18163F8700746D36 /* ProductViewController.m in Sources */,
 				48551B491D63B0A900DA3B19 /* AddNewProductViewController.m in Sources */,
+				48152B221D6F51C200AB0653 /* Model.xcdatamodeld in Sources */,
 				482640EC1D64CC500028BF08 /* EditCompanyViewController.m in Sources */,
+				4802C8C51D78A50E0055D7B6 /* ManagedProduct+CoreDataProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,6 +641,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		48152B201D6F51C200AB0653 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				48152B211D6F51C200AB0653 /* Model.xcdatamodel */,
+			);
+			currentVersion = 48152B211D6F51C200AB0653 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 48A656A918163BF200746D36 /* Project object */;
 }

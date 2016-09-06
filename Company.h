@@ -11,6 +11,7 @@
 @interface Company : NSObject
 
 @property (strong, nonatomic) NSString *companyName;
+@property int companyId;
 @property (strong, nonatomic) NSString *companyLogo;
 @property (strong, nonatomic) NSNumber *stockPrice;
 @property (strong, nonatomic) NSString *stockSymbol;

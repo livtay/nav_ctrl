@@ -7,15 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Company.h"
+#import "ManagedCompany.h"
 
 @interface DAO : NSObject
 
 @property (nonatomic, retain) NSMutableArray *companyList;
+@property (strong, nonatomic) Company *company;
 
 + (instancetype)sharedInstance;
 
 - (void)createCompanies;
 - (void)downloadImageUrl:(NSString *)imageUrl andName:(NSString *)name;
 - (void)downloadStockQuotes;
+- (Company*)addCompanyWithName:(NSString *)newCompanyName andStockSymbol:(NSString *)newStockSymbol andLogo:(NSString *)newImageUrl;
+- (void)addProductWithName:(NSString *)newProductName andUrl:(NSString *)newProductUrl andImage:(NSString *)newProductImageUrl toCompany:(int)companyId;
+- (void)loadAllCompanies;
+- (void)loadAllProducts;
 
 @end

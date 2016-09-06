@@ -11,14 +11,23 @@
 
 @implementation Product
 
-- (instancetype)initWithProductName:(NSString *)productName andUrl:(NSString *)productUrl andImageName:(NSString *)imageName {
+- (instancetype)initWithProductName:(NSString *)productName andUrl:(NSString *)productUrl andImageName:(NSString *)imageName toCompany:(int)companyId {
     self = [super init];
     if (self) {
-        self.productName = productName;
+        _productName = [productName retain];
         
-        [[DAO sharedInstance] downloadImageUrl:imageName andName:productName];
-        self.productUrl = productUrl;
-        self.imageName = imageName;
+//        NSFileManager *fileManager = [NSFileManager defaultManager];
+//        NSURL *documentsURL = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask][0];
+//        NSURL *fileURL = [documentsURL URLByAppendingPathComponent:productName];
+//        NSString *fileUrlString = [fileURL absoluteString];
+        UIImage *logoImage = [UIImage imageNamed:imageName];
+        if (logoImage == nil) {
+            [[DAO sharedInstance] downloadImageUrl:imageName andName:productName];
+        }
+        
+        _productUrl = [productUrl retain];
+        _imageName = [imageName retain];
+        _companyId = companyId;
         return self;
     }
     return nil;
