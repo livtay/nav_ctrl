@@ -18,7 +18,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+   
+    UIBarButtonItem *editBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonPressed)];
+    self.navigationItem.rightBarButtonItem = editBtn;
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -34,6 +37,16 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)editButtonPressed {
+    NSString *editTitle = [NSString stringWithFormat:@"Edit Product: %@", self.product.productName];
+    self.editProductViewController = [[EditProductViewController alloc] init];
+    self.editProductViewController.title = editTitle;
+    self.editProductViewController.product = self.product;
+    [self.navigationController pushViewController:self.editProductViewController
+                                         animated:YES];
+
 }
 
 

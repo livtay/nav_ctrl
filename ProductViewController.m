@@ -8,11 +8,14 @@
 
 #import "ProductViewController.h"
 #import "AddNewProductViewController.h"
-
+#import "ProductCell.h"
 
 @interface ProductViewController ()
 
 //@property (strong, nonatomic) NSMutableDictionary *productsForCompany;
+@property (retain, nonatomic) IBOutlet UIImageView *productCompanyLogo;
+@property (retain, nonatomic) IBOutlet UILabel *productCompanyName;
+@property (strong, nonatomic) UIView *emptyView;
 
 @end
 
@@ -20,7 +23,7 @@
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithStyle:style];
+    self = [super init];
     if (self) {
         // Custom initialization
     }
@@ -33,23 +36,31 @@
     self.wVC = [[WebViewController alloc] init];
     
     // Uncomment the following line to preserve selection between presentations.
-     self.clearsSelectionOnViewWillAppear = NO;
+    // self.clearsSelectionOnViewWillAppear = NO;
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    UIBarButtonItem *editButton = self.editButtonItem;
     UIBarButtonItem *addBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addProduct)];
-    self.navigationItem.rightBarButtonItems = @[editButton, addBtn];
+//    self.navigationItem.rightBarButtonItems = @[editButton, addBtn];
+    self.navigationItem.rightBarButtonItem = addBtn;
+    
     self.tableView.allowsSelectionDuringEditing = true;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadTable)
                                                  name:@"Data Downloaded"
                                                object:nil];
+    self.productCompanyLogo.image = [[UIImage imageNamed:self.company.companyLogo] retain];
+    self.productCompanyName.text = [NSString stringWithFormat:@"%@ (%@)", [self.company.companyName retain], [self.company.stockSymbol retain]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    [self.tableView reloadData];
+    [self.navigationController setToolbarHidden:YES];
+    self.emptyView = [[[NSBundle mainBundle] loadNibNamed:@"EmptyProducts" owner:self options:nil] objectAtIndex:0];
+    self.emptyView.frame = self.tableView.frame;
+//    self.emptyView.frame = self.view.frame;
+    [self.view addSubview:self.emptyView];
+    [self reloadTable];
     
 }
 
@@ -61,6 +72,16 @@
 
 - (void)reloadTable {
     [self.tableView reloadData];
+    if (self.company.products.count > 0) {
+        self.emptyView.hidden = true;
+    } else {
+        self.emptyView.hidden = false;
+    }
+}
+
+- (IBAction)emptyAddProductButton:(id)sender {
+    
+    [self addProduct];
 }
 
 #pragma mark - Table view data source
@@ -82,14 +103,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"ProductCell";
+    ProductCell *cell = [(ProductCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier] retain];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+        cell = [nib objectAtIndex:0];
     }
     Product *product = [self.company.products objectAtIndex:[indexPath row]];
 
-    cell.textLabel.text = product.productName;
+    cell.cellProductName.text = [NSString stringWithFormat:@"%@", product.productName];
     
 //    cell.imageView.image = [UIImage imageNamed:product.imageName];
     
@@ -102,7 +124,8 @@
         productImage = [UIImage imageWithData:imageData];
     }
     
-    [[cell imageView] setImage:productImage];
+//    [[cell imageView] setImage:productImage];
+    cell.cellProductImage.image = productImage;
     
     return cell;
 }
@@ -127,7 +150,7 @@
         
         [self.company.products removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        
+        [self reloadTable];
         
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
@@ -172,20 +195,11 @@
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *editTitle = [NSString stringWithFormat:@"Edit Product: %@", [[self.company.products objectAtIndex:indexPath.row] productName]];
-    if (self.editing) {
-        self.editProductViewController = [[EditProductViewController alloc] init];
-        self.editProductViewController.title = editTitle;
-        self.editProductViewController.product = [self.company.products objectAtIndex:indexPath.row];
-        [self.navigationController pushViewController:self.editProductViewController
-                                             animated:YES];
-        
-    } else {
-        NSURL *prodUrl = [NSURL URLWithString:[self.company.products[indexPath.row] productUrl]];
-        self.wVC.webUrl = prodUrl;
-        [self.navigationController pushViewController:self.wVC animated:YES];
-    }
-
+    NSURL *prodUrl = [NSURL URLWithString:[self.company.products[indexPath.row] productUrl]];
+    self.wVC.webUrl = prodUrl;
+    self.wVC.product = [self.company.products objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:self.wVC animated:YES];
+    
 }
 
 
@@ -195,7 +209,15 @@
     // will continue to try and send notification objects to the deallocated
     // object.
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [_productCompanyLogo release];
+    [_productCompanyName release];
+    [_tableView release];
     [super dealloc];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 78;
 }
 
 @end

@@ -14,12 +14,16 @@
 
 @class ProductViewController;
 
-@interface CompanyViewController : UITableViewController
+@interface CompanyViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, retain) NSMutableArray *companyList;
 
-@property (nonatomic, retain) IBOutlet ProductViewController *productViewController;
+@property (nonatomic, retain) ProductViewController *productViewController;
 @property (nonatomic, retain) IBOutlet AddNewCompanyViewController *addNewCompanyViewController;
 @property (nonatomic, retain) IBOutlet EditCompanyViewController *editCompanyViewController;
+@property (retain, nonatomic) IBOutlet UITableView *tableView;
+
+@property (retain, nonatomic) IBOutlet UIButton *emptyAddCompanyButton;
+- (IBAction)emptyAddCompanyButton:(id)sender;
 
 @end

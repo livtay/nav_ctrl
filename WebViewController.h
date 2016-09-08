@@ -8,9 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
+#import "EditProductViewController.h"
+#import "CompanyViewController.h"
+#import "Company.h"
 
 @interface WebViewController : UIViewController
 
 @property (strong, nonatomic) NSURL *webUrl;
+@property (nonatomic, retain) IBOutlet EditProductViewController *editProductViewController;
+@property (strong, nonatomic) Company *company;
+@property (strong, nonatomic) Product *product;
 
 @end

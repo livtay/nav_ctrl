@@ -11,10 +11,13 @@
 #import "Product.h"
 #import "DAO.h"
 #import "AddNewCompanyViewController.h"
+#import "CompanyCell.h"
 
 @interface CompanyViewController ()
 
 @property (nonatomic, strong) DAO *dao;
+@property (strong, nonatomic) UIView *emptyView;
+@property (strong, nonatomic) UIBarButtonItem *editBtn;
 
 @end
 
@@ -22,7 +25,7 @@
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithStyle:style];
+    self = [super init];
     
     if (self) {
         // Custom initialization
@@ -33,21 +36,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    [[UIBarButtonItem appearance] setTintColor:[UIColor whiteColor]];
     // Uncomment the following line to preserve selection between presentations.
-     self.clearsSelectionOnViewWillAppear = NO;
+//     self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
+    self.editBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonPressed)];
+    self.navigationItem.leftBarButtonItem = self.editBtn;
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.50 green:0.71 blue:0.22 alpha:1.0];
     
     self.dao = [DAO sharedInstance];
     self.tableView.allowsSelectionDuringEditing = true;
-    self.title = @"Mobile device makers";
+    self.title = @"Watch List";
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
+    
     UIBarButtonItem *addBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addCompany)];
-    self.navigationItem.leftBarButtonItem = addBtn;
-    
-    
+    self.navigationItem.rightBarButtonItem = addBtn;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadTable)
                                                  name:@"Data Updated"
@@ -63,13 +71,49 @@
         [[DAO sharedInstance] loadAllProducts];
     }
     self.companyList = self.dao.companyList;
+    self.emptyView = [[[NSBundle mainBundle] loadNibNamed:@"EmptyCompanies" owner:self options:nil] objectAtIndex:0];
+    self.emptyView.frame = self.view.frame;
+    self.tableView.frame = self.view.frame;
+    [self.view addSubview:self.emptyView];
+    
+    
+}
 
+- (void)editButtonPressed {
+    self.tableView.editing = YES;
+    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed)];
+    self.navigationItem.leftBarButtonItem = doneBtn;
+    
+    //Bottom toolbar
+    [self.navigationController setToolbarHidden:NO];
+    self.navigationController.toolbar.barTintColor = [UIColor blackColor];
+    self.navigationController.toolbar.tintColor = [UIColor whiteColor];
+    //Add button items
+    UIBarButtonItem *undoButton = [[UIBarButtonItem alloc] initWithTitle:@"Undo"
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(undoAction)];
+    UIBarButtonItem *redoButton = [[UIBarButtonItem alloc] initWithTitle:@"Redo"
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(redoAction)];
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                   target:nil
+                                                                                   action:nil];
+    self.toolbarItems = [NSArray arrayWithObjects:flexibleSpace, redoButton, flexibleSpace, undoButton, flexibleSpace, nil];
+    
+}
+
+- (void)doneButtonPressed {
+    self.tableView.editing = NO;
+    self.navigationItem.leftBarButtonItem = self.editBtn;
+    [self.navigationController setToolbarHidden:YES];
     
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [self reloadTable];
-    
+    [self.navigationController setToolbarHidden:YES];
     [[DAO sharedInstance] downloadStockQuotes];
 }
 
@@ -81,6 +125,22 @@
 
 - (void)reloadTable {
     [self.tableView reloadData];
+    if (self.companyList.count > 0) {
+        self.emptyView.hidden = true;
+    } else {
+        self.emptyView.hidden = false;
+    }
+}
+
+- (void)undoAction {
+    [[DAO sharedInstance] undoAction];
+    [self reloadTable];
+
+}
+
+- (void)redoAction {
+    [[DAO sharedInstance] redoAction];
+    [self reloadTable];
 }
 
 #pragma mark - Table view data source
@@ -94,22 +154,21 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return [self.companyList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"CompanyCell";
+    CompanyCell *cell = (CompanyCell *)[[tableView dequeueReusableCellWithIdentifier:CellIdentifier] retain];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+        cell = [nib objectAtIndex:0];
     }
     
-    NSString *cellTextString = [NSString stringWithFormat:@"%@ (%@) - $%@", [[self.companyList objectAtIndex:[indexPath row]] companyName], [[self.companyList objectAtIndex:[indexPath row]] stockSymbol], [[self.companyList objectAtIndex:[indexPath row]] stockPrice]];
-    cell.textLabel.text = cellTextString;
-    
+    cell.cellCompanyName.text = [NSString stringWithFormat:@"%@ (%@)", [[self.companyList objectAtIndex:[indexPath row]] companyName], [[self.companyList objectAtIndex:[indexPath row]] stockSymbol]];
+    cell.cellCompanyStockPrice.text = [NSString stringWithFormat:@"$%@", [[self.companyList objectAtIndex:[indexPath row]] stockPrice]];
     
     UIImage *logoImage = [UIImage imageNamed:[[self.companyList objectAtIndex:[indexPath row]] companyLogo]];
     if (logoImage == nil) {
@@ -120,7 +179,9 @@
         logoImage = [UIImage imageWithData:imageData];
     }
     
-    [[cell imageView] setImage:logoImage];
+//    [[cell imageView] setImage:logoImage];
+    cell.cellCompanyLogo.image = logoImage;
+    
     
     return cell;
 }
@@ -138,7 +199,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
+
         Company *company = [self.companyList objectAtIndex:[indexPath row]];
         [[DAO sharedInstance] deleteCompany:company.companyId];
         
@@ -154,8 +215,13 @@
     }   
 }
 
--(void)addCompany {
+-(void)emptyAddCompanyButton:(id)sender {
     
+    [self addCompany];
+}
+
+-(void)addCompany {
+    [self.navigationController setToolbarHidden:YES];
     if (self.addNewCompanyViewController == nil) {
         self.addNewCompanyViewController = [[AddNewCompanyViewController alloc] init];
     }
@@ -193,7 +259,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *editTitle = [NSString stringWithFormat:@"Edit Company: %@", [[self.companyList objectAtIndex:indexPath.row] companyName]];
-    if (self.editing) {
+    if (self.tableView.editing == YES) {
+        [self.navigationController setToolbarHidden:YES];
         self.editCompanyViewController = [[EditCompanyViewController alloc] init];
         self.editCompanyViewController.title = editTitle;
         self.editCompanyViewController.company = [self.companyList objectAtIndex:indexPath.row];
@@ -201,11 +268,22 @@
                                              animated:YES];
         
     } else {
-        self.productViewController.title = [[self.companyList objectAtIndex:indexPath.row] companyName];
-        self.productViewController.company = [self.companyList objectAtIndex:indexPath.row];
+        
+        //id pid = [[[NSBundle mainBundle] loadNibNamed:@"ProductViewController" owner:self options:nil] objectAtIndex:0];
+        
+        ProductViewController *productViewController =
+        [[ProductViewController alloc]
+         initWithNibName:@"ProductViewController" bundle:nil];
+        
+       // self.productViewController = [[[NSBundle mainBundle] loadNibNamed:@"ProductViewController" owner:self options:nil] objectAtIndex:0];
+        
+        productViewController.title = [[self.companyList objectAtIndex:indexPath.row] companyName];
+        productViewController.company = [self.companyList objectAtIndex:indexPath.row];
         self.dao.company = [self.companyList objectAtIndex:indexPath.row];
-        [self.navigationController pushViewController:self.productViewController
+        [self.navigationController pushViewController:productViewController
                                              animated:YES];
+        
+        [productViewController release];
     }
     
 
@@ -217,9 +295,14 @@
     // will continue to try and send notification objects to the deallocated
     // object.
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [_tableView release];
+    [_emptyAddCompanyButton release];
     [super dealloc];
 }
 
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 78;
+}
 
 @end

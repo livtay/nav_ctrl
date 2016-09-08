@@ -14,6 +14,8 @@
 
 @property (nonatomic, retain) NSMutableArray *companyList;
 @property (strong, nonatomic) Company *company;
+@property (nonatomic, strong) NSManagedObjectContext *context;
+
 
 + (instancetype)sharedInstance;
 
@@ -26,5 +28,7 @@
 - (void)loadAllProducts;
 - (void)deleteProduct:(NSString *)productName;
 - (void)deleteCompany:(int)companyId;
+- (void)undoAction;
+- (void)redoAction;
 
 @end

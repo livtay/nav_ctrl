@@ -16,7 +16,6 @@
 
 @interface DAO()
 @property (nonatomic, strong) NSManagedObjectModel *model;
-@property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, retain) NSMutableArray *managedCompanies;
 @property (nonatomic, retain) NSMutableArray *managedProducts;
 @end
@@ -48,7 +47,7 @@
     }
     self.context = [[NSManagedObjectContext alloc] init];
     [self.context setPersistentStoreCoordinator:psc];
-    [self.context setUndoManager:nil];
+    [self.context setUndoManager: [[NSUndoManager alloc] init]];
     self.managedCompanies = [[NSMutableArray alloc] init];
     self.companyList = [[NSMutableArray alloc]init];
     
@@ -114,29 +113,20 @@
 
 - (void)createCompanies {
         
-    Company *apple = [self addCompanyWithName:@"Apple mobile devices" andStockSymbol:@"AAPL" andLogo:@"apple.png"];
+    Company *apple = [self addCompanyWithName:@"Apple Inc." andStockSymbol:@"AAPL" andLogo:@"img-companyLogo-Apple.png"];
     self.company = apple;
-    [self addProductWithName:@"iPad" andUrl:@"https://www.apple.com/ipad/" andImage:@"apple.png" toCompany:apple.companyId];
-    [self addProductWithName:@"iPod Touch" andUrl:@"https://www.apple.com/ipod-touch/" andImage:@"apple.png" toCompany:apple.companyId];
-    [self addProductWithName:@"iPhone" andUrl:@"https://www.apple.com/iphone/" andImage:@"apple.png" toCompany:apple.companyId];
+    [self addProductWithName:@"iPad" andUrl:@"https://www.apple.com/ipad/" andImage:@"ipad-img.png" toCompany:apple.companyId];
+    [self addProductWithName:@"MacBook Pro" andUrl:@"https://www.apple.com/macbook-pro/" andImage:@"img-MacBook-Pro.png" toCompany:apple.companyId];
+    [self addProductWithName:@"iPhone" andUrl:@"https://www.apple.com/iphone/" andImage:@"iphone6-img.png" toCompany:apple.companyId];
     
-    Company *samsung = [self addCompanyWithName:@"Samsung mobile devices" andStockSymbol:@"SSNLF" andLogo:@"Samsung.png"];
-    self.company = samsung;
-    [self addProductWithName:@"Galaxy S4" andUrl:@"https://www.cnet.com/products/samsung-galaxy-s4/" andImage:@"Samsung.png" toCompany:samsung.companyId];
-    [self addProductWithName:@"Galaxy Note" andUrl:@"https://www.cnet.com/products/samsung-galaxy-note-7-preview/" andImage:@"Samsung.png" toCompany:samsung.companyId];
-    [self addProductWithName:@"Galaxy Tab" andUrl:@"https://www.cnet.com/products/samsung-galaxy-tab-e/" andImage:@"Samsung.png" toCompany:samsung.companyId];
+    Company *google = [self addCompanyWithName:@"Google" andStockSymbol:@"GOOG" andLogo:@"img-companyLogo-Google.png"];
+    self.company = google;
     
-    Company *nokia = [self addCompanyWithName:@"Nokia mobile devices" andStockSymbol:@"NOK" andLogo:@"Nokialogo.png"];
-    self.company = nokia;
-    [self addProductWithName:@"Lumia 1520" andUrl:@"https://www.microsoft.com/en-us/mobile/phone/lumia1520/" andImage:@"Nokialogo.png" toCompany:nokia.companyId];
-    [self addProductWithName:@"Lumia 650" andUrl:@"https://www.microsoft.com/en-us/mobile/es/lumia650/" andImage:@"Nokialogo.png" toCompany:nokia.companyId];
-    [self addProductWithName:@"N1" andUrl:@"https://www.cnet.com/products/nokia-n1/" andImage:@"Nokialogo.png" toCompany:nokia.companyId];
+    Company *twitter = [self addCompanyWithName:@"Twitter" andStockSymbol:@"TWTR" andLogo:@"img-companyLogo-Twitter.png"];
+    self.company = twitter;
     
-    Company *motorola = [self addCompanyWithName:@"Motorola mobile devices" andStockSymbol:@"MSI" andLogo:@"motologo.png"];
-    self.company = motorola;
-    [self addProductWithName:@"Moto Z Droid" andUrl:@"https://www.motorola.com/us/products/moto-z-droid-edition" andImage:@"motologo.png" toCompany:motorola.companyId];
-    [self addProductWithName:@"Moto X Pure Edition" andUrl:@"https://www.motorola.com/us/products/moto-x-pure-edition" andImage:@"motologo.png" toCompany:motorola.companyId];
-    [self addProductWithName:@"XOOM Tablet" andUrl:@"https://www.cnet.com/products/motorola-with-wi-fi/" andImage:@"motologo.png" toCompany:motorola.companyId];
+    Company *tesla = [self addCompanyWithName:@"Tesla Motors" andStockSymbol:@"TSLA" andLogo:@"img-companyLogo-Tesla.png"];
+    self.company = tesla;
     
     [self downloadStockQuotes];
     
@@ -146,6 +136,7 @@
 
 - (void)loadAllCompanies {
 
+    [self.companyList removeAllObjects];
     NSFetchRequest *request = [[NSFetchRequest alloc]init];
     //NSPredicate *p = [NSPredicate predicateWithFormat:@"emp_id >1"];
     //[request setPredicate:p];
@@ -159,9 +150,7 @@
         [self createCompanies];
     } else {
         for(ManagedCompany *mc in result){
-            //                NSLog(@"Product Count %lu", [mc.products count]);
             Company *company = [[Company alloc]initWithCompanyName:mc.companyName andStockSymbol:mc.stockSymbol andLogo:[mc valueForKey:@"companyLogo"] andId:[mc.companyId intValue]];
-            
             [self.companyList addObject:company];
             
             for (ManagedProduct *mp in mc.products) {
@@ -172,9 +161,7 @@
             // 2. loop through them
             // 3. for each one create an NSObject Product and add to company.products
         }
-        
-//        NSLog(@"Companies Count %lu", (unsigned long)[self.companyList count]);
-//        NSLog(@"Products Count %lu", (unsigned long)[self.company.products count]);
+
     }
     
 }
@@ -222,8 +209,13 @@
     } else if (result.count >= 1) {
         NSManagedObject *managedCompany = [result objectAtIndex:0];
         [self.context deleteObject:managedCompany];
-        [self.context save:nil];
     }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"Data Updated"
+         object:self];
+    });
 }
 
 - (void)deleteProduct:(NSString *)productName {
@@ -240,11 +232,39 @@
     } else if (result.count >= 1) {
         NSManagedObject *managedProduct = [result objectAtIndex:0];
         [self.context deleteObject:managedProduct];
-        [self.context save:nil];
     }
 }
 
+- (void)undoAction {
+    
+    [self.context undo];
+    [self loadAllCompanies];
+}
 
+- (void)redoAction {
+    
+    [self.context redo];
+    [self loadAllCompanies];
+}
+
+-(void) reloadDataFromContext {
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+    
+    NSEntityDescription *e = [[[self model] entitiesByName] objectForKey:@"Company"];
+    [request setEntity:e];
+    NSError *error = nil;
+    
+    //This gets data only from context, not from store
+    NSArray *result = [[self context] executeFetchRequest:request error:&error];
+    
+    if(!result) {
+        [NSException raise:@"Fetch Failed" format:@"Reason: %@", [error localizedDescription]];
+    }
+
+    self.managedCompanies = [[NSMutableArray alloc]initWithArray:result];
+    
+}
 
 - (void)downloadImageUrl:(NSString *)imageUrl andName:(NSString *)name {
     

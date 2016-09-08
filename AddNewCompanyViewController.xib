@@ -18,57 +18,33 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Company Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80k-Zh-xPE">
-                    <rect key="frame" x="8" y="209" width="127" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stock Symbol:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ma-xr-yyT">
-                    <rect key="frame" x="8" y="289" width="111" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image URL:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vyX-s7-eIV">
-                    <rect key="frame" x="8" y="365" width="89" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kmo-ao-w17">
-                    <rect key="frame" x="127" y="285" width="465" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Stock Symbol" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kmo-ao-w17">
+                    <rect key="frame" x="8" y="285" width="584" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tgv-ry-JkS">
-                    <rect key="frame" x="105" y="361" width="487" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Image URL" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tgv-ry-JkS">
+                    <rect key="frame" x="8" y="365" width="584" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pxa-UR-h2T">
-                    <rect key="frame" x="143" y="205" width="449" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Company Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pxa-UR-h2T">
+                    <rect key="frame" x="8" y="205" width="584" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Kmo-ao-w17" firstAttribute="top" secondItem="80k-Zh-xPE" secondAttribute="bottom" constant="55" id="FcF-vd-uPv"/>
-                <constraint firstItem="vyX-s7-eIV" firstAttribute="top" secondItem="4ma-xr-yyT" secondAttribute="bottom" constant="55" id="I8j-dt-xzu"/>
-                <constraint firstItem="tgv-ry-JkS" firstAttribute="centerY" secondItem="vyX-s7-eIV" secondAttribute="centerY" id="Ig6-Bd-Cp1"/>
-                <constraint firstItem="Kmo-ao-w17" firstAttribute="leading" secondItem="4ma-xr-yyT" secondAttribute="trailing" constant="8" id="KWN-Z4-q4Q"/>
-                <constraint firstItem="80k-Zh-xPE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="N1v-gR-M3J"/>
-                <constraint firstItem="pxa-UR-h2T" firstAttribute="leading" secondItem="80k-Zh-xPE" secondAttribute="trailing" constant="8" id="Zt5-Xb-3sq"/>
-                <constraint firstItem="4ma-xr-yyT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="c5c-lP-bpd"/>
-                <constraint firstItem="4ma-xr-yyT" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="g3C-Of-Zfl"/>
-                <constraint firstItem="Kmo-ao-w17" firstAttribute="centerY" secondItem="4ma-xr-yyT" secondAttribute="centerY" id="k60-J3-90y"/>
-                <constraint firstAttribute="trailing" secondItem="tgv-ry-JkS" secondAttribute="trailing" constant="8" id="mT0-Dx-t7N"/>
-                <constraint firstItem="tgv-ry-JkS" firstAttribute="leading" secondItem="vyX-s7-eIV" secondAttribute="trailing" constant="8" id="nzd-MI-so1"/>
-                <constraint firstAttribute="trailing" secondItem="pxa-UR-h2T" secondAttribute="trailing" constant="8" id="r0i-iu-cdf"/>
-                <constraint firstItem="vyX-s7-eIV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="rc0-dI-xEv"/>
-                <constraint firstItem="pxa-UR-h2T" firstAttribute="centerY" secondItem="80k-Zh-xPE" secondAttribute="centerY" id="wlt-9F-kGm"/>
-                <constraint firstAttribute="trailing" secondItem="Kmo-ao-w17" secondAttribute="trailing" constant="8" id="xEl-tc-NpP"/>
+                <constraint firstItem="Kmo-ao-w17" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="DKB-3n-RGH"/>
+                <constraint firstItem="tgv-ry-JkS" firstAttribute="top" secondItem="Kmo-ao-w17" secondAttribute="bottom" constant="50" id="DR0-xg-Nc1"/>
+                <constraint firstAttribute="trailing" secondItem="tgv-ry-JkS" secondAttribute="trailing" constant="8" id="InR-R5-hDp"/>
+                <constraint firstItem="Kmo-ao-w17" firstAttribute="top" secondItem="pxa-UR-h2T" secondAttribute="bottom" constant="50" id="QbP-bN-Dwu"/>
+                <constraint firstItem="tgv-ry-JkS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="k83-hW-LBZ"/>
+                <constraint firstAttribute="trailing" secondItem="Kmo-ao-w17" secondAttribute="trailing" constant="8" id="pTI-Ur-hGT"/>
+                <constraint firstAttribute="trailing" secondItem="pxa-UR-h2T" secondAttribute="trailing" constant="8" id="psA-9B-WBu"/>
+                <constraint firstItem="pxa-UR-h2T" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="qkI-8l-B9m"/>
+                <constraint firstItem="Kmo-ao-w17" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="ygX-sP-BId"/>
             </constraints>
             <point key="canvasLocation" x="329" y="315"/>
         </view>
