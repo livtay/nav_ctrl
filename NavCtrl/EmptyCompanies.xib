@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emptystate-homeView" translatesAutoresizingMaskIntoConstraints="NO" id="dm3-3r-MBP">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="emptystate-homeView" translatesAutoresizingMaskIntoConstraints="NO" id="dm3-3r-MBP">
                     <rect key="frame" x="264" y="183" width="72" height="72"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="dm3-3r-MBP" secondAttribute="height" multiplier="1:1" id="bF6-ef-IUd"/>
