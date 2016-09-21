@@ -25,7 +25,7 @@
 - (Company*)addCompanyWithName:(NSString *)newCompanyName andStockSymbol:(NSString *)newStockSymbol andLogo:(NSString *)newImageUrl;
 - (void)addProductWithName:(NSString *)newProductName andUrl:(NSString *)newProductUrl andImage:(NSString *)newProductImageUrl toCompany:(int)companyId;
 - (void)loadAllCompanies;
-- (void)loadAllProducts;
+//- (void)loadAllProducts;
 - (void)deleteProduct:(NSString *)productName;
 - (void)deleteCompany:(int)companyId;
 - (void)undoAction;

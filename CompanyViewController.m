@@ -64,12 +64,11 @@
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     if (![defaults boolForKey:hasRunAppOnceKey]) {
         [[DAO sharedInstance] createCompanies];
-        [[DAO sharedInstance] loadAllProducts];
         [defaults setBool:YES forKey:hasRunAppOnceKey];
     } else {
         [[DAO sharedInstance] loadAllCompanies];
-        [[DAO sharedInstance] loadAllProducts];
     }
+    [[DAO sharedInstance] downloadStockQuotes];
     self.companyList = self.dao.companyList;
     self.emptyView = [[[NSBundle mainBundle] loadNibNamed:@"EmptyCompanies" owner:self options:nil] objectAtIndex:0];
     self.emptyView.frame = self.view.frame;
@@ -102,6 +101,10 @@
                                                                                    action:nil];
     self.toolbarItems = [NSArray arrayWithObjects:flexibleSpace, redoButton, flexibleSpace, undoButton, flexibleSpace, nil];
     
+    
+    [undoButton release];
+    [redoButton release];
+    [flexibleSpace release];
 }
 
 - (void)doneButtonPressed {

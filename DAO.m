@@ -54,7 +54,7 @@
 }
 
 - (NSString*)archivePath {
-
+    
     NSArray *documentsDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [documentsDirectories objectAtIndex:0];
     NSLog(@"%@", documentsDirectory);
@@ -74,6 +74,7 @@
     
     [self.context save:nil];
     return newCompany;
+    [newCompany release];
 }
 
 - (void)addProductWithName:(NSString *)newProductName andUrl:(NSString *)newProductUrl andImage:(NSString *)newProductImageUrl toCompany:(int)companyId {
@@ -109,10 +110,11 @@
     //set relationship between NSManagedProduct and NSManagedCompany
     
     [self.context save:nil];
+    [request release];
 }
 
 - (void)createCompanies {
-        
+    
     Company *apple = [self addCompanyWithName:@"Apple Inc." andStockSymbol:@"AAPL" andLogo:@"img-companyLogo-Apple.png"];
     self.company = apple;
     [self addProductWithName:@"iPad" andUrl:@"https://www.apple.com/ipad/" andImage:@"ipad-img.png" toCompany:apple.companyId];
@@ -135,7 +137,7 @@
 
 
 - (void)loadAllCompanies {
-
+    
     [self.companyList removeAllObjects];
     NSFetchRequest *request = [[NSFetchRequest alloc]init];
     //NSPredicate *p = [NSPredicate predicateWithFormat:@"emp_id >1"];
@@ -150,49 +152,21 @@
         [self createCompanies];
     } else {
         for(ManagedCompany *mc in result){
-            Company *company = [[Company alloc]initWithCompanyName:mc.companyName andStockSymbol:mc.stockSymbol andLogo:[mc valueForKey:@"companyLogo"] andId:[mc.companyId intValue]];
+            Company *company = [[Company alloc]initWithCompanyName:mc.companyName andStockSymbol:mc.stockSymbol andLogo:mc.companyLogo andId:[mc.companyId intValue]];
             [self.companyList addObject:company];
+//            [company release];
             
             for (ManagedProduct *mp in mc.products) {
                 Product *product = [[Product alloc] initWithProductName:mp.productName andUrl:mp.productUrl andImageName:mp.productImage toCompany:(int)[mp.companyId integerValue]];
                 [company.products addObject:product];
+                [product release];
             }
-            // 1. get (core data) managed products from mc
-            // 2. loop through them
-            // 3. for each one create an NSObject Product and add to company.products
-        }
-
-    }
-    
-}
-
-- (void)loadAllProducts
-{
-    for (Company *company in self.companyList) {
-        if (company.products.count == 0) {
-            NSFetchRequest *request = [[NSFetchRequest alloc]init];
-            //NSPredicate *p = [NSPredicate predicateWithFormat:@"emp_id >1"];
-            //[request setPredicate:p];
-            NSEntityDescription *e = [[self.model entitiesByName] objectForKey:@"Product"];
-            [request setEntity:e];
-            NSError *error = nil;
-            NSArray *result = [self.context executeFetchRequest:request error:&error];
-            if(error){
-                [NSException raise:@"Fetch Failed" format:@"Reason: %@", [error localizedDescription]];
-            } else if (!result) {
-                [self createCompanies];
-            } else {
-                self.company.products = [[NSMutableArray alloc]initWithArray:result];
-                
-            }
+            
+            [company release];
         }
     }
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter]
-         postNotificationName:@"Data Updated"
-         object:self];
-    });
+    [request release];
+//    [result release];
 }
 
 - (void)deleteCompany:(int)companyId {
@@ -216,6 +190,9 @@
          postNotificationName:@"Data Updated"
          object:self];
     });
+    
+    [request release];
+//    [p release];
 }
 
 - (void)deleteProduct:(NSString *)productName {
@@ -233,6 +210,8 @@
         NSManagedObject *managedProduct = [result objectAtIndex:0];
         [self.context deleteObject:managedProduct];
     }
+    
+    [request release];
 }
 
 - (void)undoAction {
@@ -261,7 +240,7 @@
     if(!result) {
         [NSException raise:@"Fetch Failed" format:@"Reason: %@", [error localizedDescription]];
     }
-
+    
     self.managedCompanies = [[NSMutableArray alloc]initWithArray:result];
     
 }
@@ -294,6 +273,8 @@
         }
     }];
     [downloadTask resume];
+    //    [url release];
+    [request release];
 }
 
 - (void)downloadStockQuotes {
@@ -310,40 +291,41 @@
     NSURL *url = [NSURL URLWithString:urlString];
     NSMutableURLRequest *urlReq = [NSMutableURLRequest requestWithURL:url];
     NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:urlReq completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (error != nil) {
-                if (error.code == NSURLErrorNotConnectedToInternet) {
+        if (error != nil) {
+            if (error.code == NSURLErrorNotConnectedToInternet) {
+                dispatch_async(dispatch_get_main_queue(), ^{
                     UIAlertController *errorAlert;
                     errorAlert = [UIAlertController alertControllerWithTitle:@"Error" message:@"No internet access" preferredStyle:UIAlertControllerStyleAlert];
                     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {}];
                     [errorAlert addAction:defaultAction];
-                }
+                });
+                
+            } else {
+                NSLog(@"%@", error.localizedDescription);
             }
-        });
-        if (!error) {
+        } else {
             NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSArray *stockPrices = [dataString componentsSeparatedByString:@"\n"];
             NSLog(@"%@", stockPrices);
             
-            for (int i = 0; i < stockPrices.count; i++) {
-                for (i = 0; i < [self.companyList count]; i++) {
-                    Company *company = [self.companyList objectAtIndex:i];
-                    company.stockPrice = stockPrices[i];
-                }
+            for (int i = 0; i < stockPrices.count - 1; i++) {
+                Company *company = [self.companyList objectAtIndex:i];
+                company.stockPrice = stockPrices[i];
             }
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"Data Updated"
-                 object:self];
-            });
             
-        } else {
-            NSLog(@"%@", error.localizedDescription);
+            [dataString release];
+            
         }
         
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"Data Updated"
+             object:nil];
+        });
     }];
     [task resume];
+    [stockSymbols release];
     
 }
 

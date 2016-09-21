@@ -48,8 +48,10 @@
                                              selector:@selector(reloadTable)
                                                  name:@"Data Downloaded"
                                                object:nil];
-    self.productCompanyLogo.image = [[UIImage imageNamed:self.company.companyLogo] retain];
+    self.productCompanyLogo.image = [UIImage imageNamed:self.company.companyLogo];
     self.productCompanyName.text = [NSString stringWithFormat:@"%@ (%@)", [self.company.companyName retain], [self.company.stockSymbol retain]];
+    
+    [addBtn release];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -212,6 +214,7 @@
     [_productCompanyLogo release];
     [_productCompanyName release];
     [_tableView release];
+    [_company release];
     [super dealloc];
 }
 

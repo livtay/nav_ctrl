@@ -33,4 +33,12 @@
     return nil;
 }
 
+-(void)dealloc {
+    [_productUrl release];
+    [_imageName release];
+    [_productName release];
+    
+    [super dealloc];
+}
+
 @end

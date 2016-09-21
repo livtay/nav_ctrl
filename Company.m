@@ -14,7 +14,7 @@
 - (instancetype)initWithCompanyName:(NSString *)companyName andStockSymbol:(NSString *)stockSymbol andLogo:(NSString *)companyLogo andId:(int )companyId{
     self = [super init];
     if (self) {
-        self.companyName = companyName;
+        _companyName = [companyName retain];
         
         //Download image
         //save to file with filename that matches company name
@@ -35,7 +35,7 @@
         
         _stockSymbol = [stockSymbol retain];
         _companyLogo = [companyLogo retain];
-        _products = [[[NSMutableArray alloc] init] retain];
+        _products = [[NSMutableArray alloc] init];
         
         _companyId = companyId;
           return self;
@@ -47,7 +47,7 @@
 - (instancetype)initWithCompanyName:(NSString *)companyName andStockSymbol:(NSString *)stockSymbol andLogo:(NSString *)companyLogo {
     self = [super init];
     if (self) {
-        self.companyName = companyName;
+         _companyName = [companyName retain];
         
         //Download image
         //save to file with filename that matches company name
@@ -68,7 +68,7 @@
         
         _stockSymbol = [stockSymbol retain];
         _companyLogo = [companyLogo retain];
-        _products = [[[NSMutableArray alloc] init] retain];
+        _products = [[NSMutableArray alloc] init];
         
         //check nsuserdefaults for "companyIdCounter"
         //if there's a value, increment it and use it as the new company's companyId
@@ -86,6 +86,17 @@
         return self;
     }
     return nil;
+}
+
+-(void)dealloc {
+    [_companyName release];
+    [_stockSymbol release];
+    [_companyLogo release];
+    [_products release];
+    [_stockPrice release];
+    
+    
+    [super dealloc];
 }
 
 @end
