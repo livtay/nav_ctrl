@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SuperViewController.h"
+#import "CompanyViewController.h"
 
-@interface AddNewCompanyViewController : UIViewController
+@interface AddNewCompanyViewController : SuperViewController
 
 @property (retain, nonatomic) IBOutlet UITextField *addCompanyNameTextField;
 @property (retain, nonatomic) IBOutlet UITextField *addStockSymbolTextField;

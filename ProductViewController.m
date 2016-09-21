@@ -42,6 +42,9 @@
 //    self.navigationItem.rightBarButtonItems = @[editButton, addBtn];
     self.navigationItem.rightBarButtonItem = addBtn;
     
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"< Watch List" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = backBarButtonItem;
+    
     self.tableView.allowsSelectionDuringEditing = true;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -52,6 +55,7 @@
     self.productCompanyName.text = [NSString stringWithFormat:@"%@ (%@)", [self.company.companyName retain], [self.company.stockSymbol retain]];
     
     [addBtn release];
+    [backBarButtonItem release];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -59,8 +63,10 @@
     [super viewWillAppear:animated];
     [self.navigationController setToolbarHidden:YES];
     self.emptyView = [[[NSBundle mainBundle] loadNibNamed:@"EmptyProducts" owner:self options:nil] objectAtIndex:0];
-    self.emptyView.frame = self.tableView.frame;
-//    self.emptyView.frame = self.view.frame;
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
+    self.emptyView.frame = CGRectMake(0, screenHeight/2, screenWidth , screenHeight/2);
     [self.view addSubview:self.emptyView];
     [self reloadTable];
     
@@ -79,6 +85,19 @@
     } else {
         self.emptyView.hidden = false;
     }
+}
+
+-(IBAction)back {
+    
+    CompanyViewController *companyVC = [[CompanyViewController alloc] init];
+    
+    [UIView transitionWithView:self.navigationController.view
+                      duration:0.75
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:^{
+                        [self.navigationController pushViewController:companyVC animated:NO];
+                    }
+                    completion:nil];
 }
 
 - (IBAction)emptyAddProductButton:(id)sender {
@@ -169,7 +188,13 @@
     self.addNewProductViewController.title = @"Add New Product";
     self.addNewProductViewController.company = self.company;
     
-    [self.navigationController pushViewController:self.addNewProductViewController animated:YES];
+    [UIView transitionWithView:self.navigationController.view
+                      duration:0.75
+                       options:UIViewAnimationOptionTransitionCurlUp
+                    animations:^{
+                        [self.navigationController pushViewController:self.addNewProductViewController animated:NO];
+                    }
+                    completion:nil];
 }
 
 
@@ -200,7 +225,14 @@
     NSURL *prodUrl = [NSURL URLWithString:[self.company.products[indexPath.row] productUrl]];
     self.wVC.webUrl = prodUrl;
     self.wVC.product = [self.company.products objectAtIndex:indexPath.row];
-    [self.navigationController pushViewController:self.wVC animated:YES];
+    
+    [UIView transitionWithView:self.navigationController.view
+                      duration:0.75
+                       options:UIViewAnimationOptionTransitionFlipFromRight
+                    animations:^{
+                        [self.navigationController pushViewController:self.wVC animated:NO];
+                    }
+                    completion:nil];
     
 }
 

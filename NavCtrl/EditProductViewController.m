@@ -21,20 +21,12 @@
     {
         [self setViewMovedUp:YES];
     }
-    else if (self.view.frame.origin.y < 0)
-    {
-        [self setViewMovedUp:NO];
-    }
 }
 
 -(void)keyboardWillHide {
     if (self.view.frame.origin.y >= 0)
     {
         [self setViewMovedUp:YES];
-    }
-    else if (self.view.frame.origin.y < 0)
-    {
-        [self setViewMovedUp:NO];
     }
 }
 
@@ -101,6 +93,23 @@
     self.product.imageName = self.editProductImageTextField.text;
     [self.navigationController popToRootViewControllerAnimated:YES];
     
+}
+
+
+#pragma mark - UITextfieldDelegate
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    [self setViewMovedUp:NO];
+    return YES;
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self keyboardWillHide];
+    [self.editProductNameTextField endEditing:YES];
+    [self.editProductUrlTextField endEditing:YES];
+    [self.editProductImageTextField endEditing:YES];
+    [self setViewMovedUp:NO];
 }
 
 - (void)dealloc {

@@ -22,20 +22,12 @@
     {
         [self setViewMovedUp:YES];
     }
-    else if (self.view.frame.origin.y < 0)
-    {
-        [self setViewMovedUp:NO];
-    }
 }
 
 -(void)keyboardWillHide {
     if (self.view.frame.origin.y >= 0)
     {
         [self setViewMovedUp:YES];
-    }
-    else if (self.view.frame.origin.y < 0)
-    {
-        [self setViewMovedUp:NO];
     }
 }
 
@@ -66,7 +58,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"< Watch List" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = backBarButtonItem;
+    
+    [backBarButtonItem release];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -102,6 +98,35 @@
     self.company.companyLogo = self.editImageUrlTextField.text;
     [self.navigationController popToRootViewControllerAnimated:YES];
     
+}
+
+-(IBAction)back {
+    
+    CompanyViewController *companyVC = [[CompanyViewController alloc] init];
+    
+    [UIView transitionWithView:self.navigationController.view
+                      duration:0.75
+                       options:UIViewAnimationOptionTransitionFlipFromTop
+                    animations:^{
+                        [self.navigationController pushViewController:companyVC animated:NO];
+                    }
+                    completion:nil];
+}
+
+#pragma mark - UITextfieldDelegate
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    [self setViewMovedUp:NO];
+    return YES;
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self keyboardWillHide];
+    [self.editCompanyTextField endEditing:YES];
+    [self.editSymbolTextField endEditing:YES];
+    [self.editImageUrlTextField endEditing:YES];
+    [self setViewMovedUp:NO];
 }
 
 - (void)dealloc {

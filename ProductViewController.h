@@ -15,6 +15,8 @@
 #import "EditProductViewController.h"
 #import "DAO.h"
 
+@class WebViewController;
+
 @interface ProductViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 //@property (nonatomic, retain) NSMutableArray *products; //
@@ -23,6 +25,7 @@
 //@property (strong, nonatomic) DAO *dao;
 @property (nonatomic, retain) IBOutlet AddNewProductViewController *addNewProductViewController;
 @property (nonatomic, retain) IBOutlet EditProductViewController *editProductViewController;
+@property (nonatomic, retain) IBOutlet CompanyViewController *companyViewController;
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
 
 - (IBAction)emptyAddProductButton:(id)sender;

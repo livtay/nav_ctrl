@@ -53,9 +53,9 @@
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
-    
     UIBarButtonItem *addBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addCompany)];
     self.navigationItem.rightBarButtonItem = addBtn;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadTable)
                                                  name:@"Data Updated"
@@ -224,16 +224,24 @@
 }
 
 -(void)addCompany {
+    
     [self.navigationController setToolbarHidden:YES];
+    
     if (self.addNewCompanyViewController == nil) {
         self.addNewCompanyViewController = [[AddNewCompanyViewController alloc] init];
     }
-    
     self.addNewCompanyViewController.title = @"Add New Company";
     
-    [self.navigationController pushViewController:self.addNewCompanyViewController animated:YES];
+    
+    [UIView transitionWithView:self.navigationController.view
+                      duration:0.75
+                       options:UIViewAnimationOptionTransitionCurlUp
+                    animations:^{
+                        [self.navigationController pushViewController:self.addNewCompanyViewController animated:NO];
+                    }
+                    completion:nil];
+    
 }
-
 
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
@@ -254,8 +262,6 @@
     return YES;
 }
 
-
-
 #pragma mark - Table view delegate
 
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
@@ -267,24 +273,33 @@
         self.editCompanyViewController = [[EditCompanyViewController alloc] init];
         self.editCompanyViewController.title = editTitle;
         self.editCompanyViewController.company = [self.companyList objectAtIndex:indexPath.row];
-        [self.navigationController pushViewController:self.editCompanyViewController
-                                             animated:YES];
         
+        [UIView transitionWithView:self.navigationController.view
+                          duration:0.75
+                           options:UIViewAnimationOptionTransitionFlipFromBottom
+                        animations:^{
+                            [self.navigationController pushViewController:self.editCompanyViewController animated:NO];
+                        }
+                        completion:nil];
     } else {
         
         //id pid = [[[NSBundle mainBundle] loadNibNamed:@"ProductViewController" owner:self options:nil] objectAtIndex:0];
         
-        ProductViewController *productViewController =
-        [[ProductViewController alloc]
-         initWithNibName:@"ProductViewController" bundle:nil];
+        ProductViewController *productViewController = [[ProductViewController alloc] initWithNibName:@"ProductViewController" bundle:nil];
         
        // self.productViewController = [[[NSBundle mainBundle] loadNibNamed:@"ProductViewController" owner:self options:nil] objectAtIndex:0];
         
         productViewController.title = [[self.companyList objectAtIndex:indexPath.row] companyName];
         productViewController.company = [self.companyList objectAtIndex:indexPath.row];
         self.dao.company = [self.companyList objectAtIndex:indexPath.row];
-        [self.navigationController pushViewController:productViewController
-                                             animated:YES];
+        
+        [UIView transitionWithView:self.navigationController.view
+                          duration:0.75
+                           options:UIViewAnimationOptionTransitionFlipFromRight
+                        animations:^{
+                            [self.navigationController pushViewController:productViewController animated:NO];
+                        }
+                        completion:nil];
         
         [productViewController release];
     }

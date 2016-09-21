@@ -32,6 +32,7 @@
 		486BAD671D5A6B070091A706 /* Samsung.png in Resources */ = {isa = PBXBuildFile; fileRef = 486BAD661D5A6B070091A706 /* Samsung.png */; };
 		486BAD6D1D5A6C530091A706 /* motorola2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 486BAD6C1D5A6C530091A706 /* motorola2.jpg */; };
 		486BAD6F1D5A6C570091A706 /* Nokia2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 486BAD6E1D5A6C570091A706 /* Nokia2.jpg */; };
+		48777A801D931ED900FAD6CB /* SuperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48777A7F1D931ED900FAD6CB /* SuperViewController.m */; };
 		487DFCBC1D81C51B00D65269 /* ProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 487DFCBB1D81C51B00D65269 /* ProductViewController.xib */; };
 		487DFCBE1D81D37B00D65269 /* EmptyProducts.xib in Resources */ = {isa = PBXBuildFile; fileRef = 487DFCBD1D81D37B00D65269 /* EmptyProducts.xib */; };
 		487DFCC21D81DEE100D65269 /* ProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 487DFCC01D81DEE100D65269 /* ProductCell.m */; };
@@ -103,6 +104,8 @@
 		486BAD661D5A6B070091A706 /* Samsung.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Samsung.png; sourceTree = "<group>"; };
 		486BAD6C1D5A6C530091A706 /* motorola2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = motorola2.jpg; path = NavCtrlTests/motorola2.jpg; sourceTree = SOURCE_ROOT; };
 		486BAD6E1D5A6C570091A706 /* Nokia2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Nokia2.jpg; sourceTree = "<group>"; };
+		48777A7E1D931ED900FAD6CB /* SuperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuperViewController.h; sourceTree = "<group>"; };
+		48777A7F1D931ED900FAD6CB /* SuperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuperViewController.m; sourceTree = "<group>"; };
 		487DFCBB1D81C51B00D65269 /* ProductViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductViewController.xib; sourceTree = "<group>"; };
 		487DFCBD1D81D37B00D65269 /* EmptyProducts.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyProducts.xib; sourceTree = "<group>"; };
 		487DFCBF1D81DEE100D65269 /* ProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductCell.h; sourceTree = "<group>"; };
@@ -203,6 +206,8 @@
 		483796CC1BCBF7C70062D5AB /* ParentViewController */ = {
 			isa = PBXGroup;
 			children = (
+				48777A7E1D931ED900FAD6CB /* SuperViewController.h */,
+				48777A7F1D931ED900FAD6CB /* SuperViewController.m */,
 				48A656E318163C1B00746D36 /* CompanyViewController.h */,
 				48A656E418163C1B00746D36 /* CompanyViewController.m */,
 				48A656E518163C1B00746D36 /* CompanyViewController.xib */,
@@ -372,6 +377,9 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Aditya Narayan";
 				TargetAttributes = {
+					48A656B018163BF200746D36 = {
+						DevelopmentTeam = ZUTQ2SDKNS;
+					};
 					48A656CB18163BF200746D36 = {
 						TestTargetID = 48A656B018163BF200746D36;
 					};
@@ -437,6 +445,7 @@
 			files = (
 				482A5F421D5CDD6A0061A009 /* Product.m in Sources */,
 				48A656E618163C1B00746D36 /* CompanyViewController.m in Sources */,
+				48777A801D931ED900FAD6CB /* SuperViewController.m in Sources */,
 				482A5F3F1D5CDD5D0061A009 /* Company.m in Sources */,
 				481A53511D5B9BBE00DB26DB /* WebViewController.m in Sources */,
 				482A5F451D5D185B0061A009 /* DAO.m in Sources */,
@@ -574,13 +583,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NavCtrl/NavCtrl-Prefix.pch";
 				INFOPLIST_FILE = "NavCtrl/NavCtrl-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "qcd.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.NavCtrl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -592,13 +604,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NavCtrl/NavCtrl-Prefix.pch";
 				INFOPLIST_FILE = "NavCtrl/NavCtrl-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "qcd.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.NavCtrl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

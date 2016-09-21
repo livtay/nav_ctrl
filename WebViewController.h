@@ -11,6 +11,7 @@
 #import "EditProductViewController.h"
 #import "CompanyViewController.h"
 #import "Company.h"
+#import "ProductViewController.h"
 
 @interface WebViewController : UIViewController
 

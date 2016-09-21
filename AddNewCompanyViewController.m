@@ -11,7 +11,7 @@
 #import "Company.h"
 #define kOFFSET_FOR_KEYBOARD 80.0
 
-@interface AddNewCompanyViewController ()
+@interface AddNewCompanyViewController () 
 
 @end
 
@@ -23,20 +23,12 @@
     {
         [self setViewMovedUp:YES];
     }
-    else if (self.view.frame.origin.y < 0)
-    {
-        [self setViewMovedUp:NO];
-    }
 }
 
 -(void)keyboardWillHide {
     if (self.view.frame.origin.y >= 0)
     {
         [self setViewMovedUp:YES];
-    }
-    else if (self.view.frame.origin.y < 0)
-    {
-        [self setViewMovedUp:NO];
     }
 }
 
@@ -68,6 +60,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"< Watch List" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = backBarButtonItem;
+    
+    [backBarButtonItem release];
     
 }
 
@@ -101,10 +98,44 @@
     
     [[DAO sharedInstance] addCompanyWithName:newCompanyName andStockSymbol:newStockSymbol andLogo:newImageUrl];
     
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    [[DAO sharedInstance] downloadStockQuotes];
-
+    [UIView transitionWithView:self.navigationController.view
+                      duration:0.75
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        [self.navigationController popToRootViewControllerAnimated:NO];
+                    }
+                    completion:nil];
     
+    [[DAO sharedInstance] downloadStockQuotes];
+}
+
+-(IBAction)back {
+    
+    CompanyViewController *companyVC = [[CompanyViewController alloc] init];
+    
+    [UIView transitionWithView:self.navigationController.view
+                      duration:0.75
+                       options:UIViewAnimationOptionTransitionCurlDown
+                    animations:^{
+                        [self.navigationController pushViewController:companyVC animated:NO];
+                    }
+                    completion:nil];
+}
+
+#pragma mark - UITextfieldDelegate
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    [self setViewMovedUp:NO];
+    return YES;
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self keyboardWillHide];
+    [self.addCompanyNameTextField endEditing:YES];
+    [self.addStockSymbolTextField endEditing:YES];
+    [self.addImageUrlTextField endEditing:YES];
+    [self setViewMovedUp:NO];
 }
 
 - (void)dealloc {

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Company.h"
+#import "SuperViewController.h"
 
-@interface AddNewProductViewController : UIViewController
+@interface AddNewProductViewController : SuperViewController
 
 @property (retain, nonatomic) IBOutlet UITextField *addNewProductTextField;
 @property (retain, nonatomic) IBOutlet UITextField *addNewProductUrlTextField;

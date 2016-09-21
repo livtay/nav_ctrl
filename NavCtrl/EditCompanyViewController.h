@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Company.h"
+#import "SuperViewController.h"
+#import "CompanyViewController.h"
 
-@interface EditCompanyViewController : UIViewController
+@interface EditCompanyViewController : SuperViewController
 
 @property (retain, nonatomic) IBOutlet UITextField *editCompanyTextField;
 @property (retain, nonatomic) IBOutlet UITextField *editSymbolTextField;

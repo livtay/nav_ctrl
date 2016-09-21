@@ -13,6 +13,8 @@
 #import "EditCompanyViewController.h"
 
 @class ProductViewController;
+@class EditCompanyViewController;
+@class AddNewCompanyViewController;
 
 @interface CompanyViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 

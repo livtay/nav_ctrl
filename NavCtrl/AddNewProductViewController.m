@@ -24,20 +24,12 @@
     {
         [self setViewMovedUp:YES];
     }
-    else if (self.view.frame.origin.y < 0)
-    {
-        [self setViewMovedUp:NO];
-    }
 }
 
 -(void)keyboardWillHide {
     if (self.view.frame.origin.y >= 0)
     {
         [self setViewMovedUp:YES];
-    }
-    else if (self.view.frame.origin.y < 0)
-    {
-        [self setViewMovedUp:NO];
     }
 }
 
@@ -68,7 +60,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"< Back" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = backBarButtonItem;
+    
+    [backBarButtonItem release];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -103,6 +99,35 @@
     [[DAO sharedInstance] addProductWithName:newProductName andUrl:newProductUrl andImage:newProductImageUrl toCompany:newProductCompany] ;
     
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+-(IBAction)back {
+    
+    CompanyViewController *companyVC = [[CompanyViewController alloc] init];
+    
+    [UIView transitionWithView:self.navigationController.view
+                      duration:0.75
+                       options:UIViewAnimationOptionTransitionCurlDown
+                    animations:^{
+                        [self.navigationController pushViewController:companyVC animated:NO];
+                    }
+                    completion:nil];
+}
+
+#pragma mark - UITextfieldDelegate
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    [self setViewMovedUp:NO];
+    return YES;
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self keyboardWillHide];
+    [self.addNewProductTextField endEditing:YES];
+    [self.addNewProductUrlTextField endEditing:YES];
+    [self.addNewProductImageUrlTextField endEditing:YES];
+    [self setViewMovedUp:NO];
 }
 
 - (void)dealloc {
