@@ -89,6 +89,8 @@
     productMO.companyId = [NSNumber numberWithInteger:newProduct.companyId];
     [self.managedProducts addObject:productMO];
     
+    [newProduct release];
+    
     //Fetch a company with companyID
     
     NSFetchRequest *request = [[NSFetchRequest alloc]init];
@@ -154,7 +156,6 @@
         for(ManagedCompany *mc in result){
             Company *company = [[Company alloc]initWithCompanyName:mc.companyName andStockSymbol:mc.stockSymbol andLogo:mc.companyLogo andId:[mc.companyId intValue]];
             [self.companyList addObject:company];
-//            [company release];
             
             for (ManagedProduct *mp in mc.products) {
                 Product *product = [[Product alloc] initWithProductName:mp.productName andUrl:mp.productUrl andImageName:mp.productImage toCompany:(int)[mp.companyId integerValue]];
@@ -166,7 +167,6 @@
         }
     }
     [request release];
-//    [result release];
 }
 
 - (void)deleteCompany:(int)companyId {
@@ -192,7 +192,6 @@
     });
     
     [request release];
-//    [p release];
 }
 
 - (void)deleteProduct:(NSString *)productName {
@@ -226,7 +225,7 @@
     [self loadAllCompanies];
 }
 
--(void) reloadDataFromContext {
+-(void)reloadDataFromContext {
     
     NSFetchRequest *request = [[NSFetchRequest alloc]init];
     
@@ -273,7 +272,6 @@
         }
     }];
     [downloadTask resume];
-    //    [url release];
     [request release];
 }
 
@@ -306,7 +304,6 @@
         } else {
             NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSArray *stockPrices = [dataString componentsSeparatedByString:@"\n"];
-            NSLog(@"%@", stockPrices);
             
             for (int i = 0; i < stockPrices.count - 1; i++) {
                 Company *company = [self.companyList objectAtIndex:i];

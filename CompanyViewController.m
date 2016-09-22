@@ -18,6 +18,7 @@
 @property (nonatomic, strong) DAO *dao;
 @property (strong, nonatomic) UIView *emptyView;
 @property (strong, nonatomic) UIBarButtonItem *editBtn;
+@property (strong, nonatomic) NSTimer *timer;
 
 @end
 
@@ -41,7 +42,7 @@
     // Uncomment the following line to preserve selection between presentations.
 //     self.clearsSelectionOnViewWillAppear = NO;
  
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    //display an Edit button in the navigation bar for this view controller
     self.editBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonPressed)];
     self.navigationItem.leftBarButtonItem = self.editBtn;
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.50 green:0.71 blue:0.22 alpha:1.0];
@@ -114,10 +115,19 @@
     
 }
 
+-(void)startTimer {
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:60.0
+                                                  target:self
+                                                selector:@selector(refreshStockQuotes)
+                                                userInfo:nil
+                                                 repeats:YES];
+}
+
 -(void)viewWillAppear:(BOOL)animated {
+    [self startTimer];
+    [[DAO sharedInstance] downloadStockQuotes];
     [self reloadTable];
     [self.navigationController setToolbarHidden:YES];
-    [[DAO sharedInstance] downloadStockQuotes];
 }
 
 - (void)didReceiveMemoryWarning
@@ -133,6 +143,11 @@
     } else {
         self.emptyView.hidden = false;
     }
+}
+
+-(void)refreshStockQuotes {
+    [[DAO sharedInstance] downloadStockQuotes];
+    [self reloadTable];
 }
 
 - (void)undoAction {
